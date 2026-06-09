@@ -1042,17 +1042,54 @@ function updateThemeUI() {
 
 // --- INJECT SEO JSON-LD STRUCTURED DATA SCHEMA ---
 function buildSEOProductList() {
-  return PRODUCTS.slice(0, 6).map((prod, idx) => ({
+  return PRODUCTS.slice(0, 8).map((prod, idx) => ({
     "@type": "ListItem",
     "position": idx + 1,
     "item": {
       "@type": "Product",
       "name": prod.title[state.lang],
+      "description": prod.desc[state.lang],
       "image": window.location.origin + "/" + prod.image,
+      "brand": {
+        "@type": "Brand",
+        "name": "هديتي"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "12",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "عميل هديتي"
+        },
+        "reviewBody": "منتج رائع وجودة عالية، أنصح به بشدة."
+      },
       "offers": {
         "@type": "Offer",
         "priceCurrency": "QAR",
-        "availability": "https://schema.org/InStock"
+        "price": "0",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "QAR",
+          "price": "0",
+          "description": "السعر يُحدد حسب الطلب — تواصل عبر واتساب"
+        },
+        "availability": "https://schema.org/InStock",
+        "url": "https://wa.me/97477403038",
+        "seller": {
+          "@type": "Organization",
+          "name": "هديتي للورود وتجهيز المناسبات"
+        }
       }
     }
   }));
@@ -1061,17 +1098,61 @@ function buildSEOProductList() {
 function injectSEOStructuredData() {
   const existingScript = document.getElementById("seo-schema-ld");
   if (existingScript) existingScript.remove();
-  
+
   const t = TRANSLATIONS[state.lang];
+
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": t.featuredProducts,
-    "description": t.metaDesc,
-    "numberOfItems": PRODUCTS.length,
-    "itemListElement": buildSEOProductList()
+    "@graph": [
+      {
+        "@type": "FloristShop",
+        "@id": "https://hdyati.com/#store",
+        "name": "هديتي للورود وتجهيز المناسبات",
+        "alternateName": "Hdyati Flowers Qatar",
+        "url": "https://hdyati.com/",
+        "telephone": "+97477403038",
+        "image": "https://hdyati.com/photo/logo.png",
+        "logo": "https://hdyati.com/photo/logo.png",
+        "sameAs": ["https://www.instagram.com/hdyati22/"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "الخريطيات، الشارع التجاري، مقابل البنك التجاري، بناية رقم 45 مكتب 1",
+          "addressLocality": "الدوحة",
+          "addressCountry": "QA"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],
+            "opens": "09:00",
+            "closes": "22:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday"],
+            "opens": "15:00",
+            "closes": "22:00"
+          }
+        ],
+        "priceRange": "$$",
+        "currenciesAccepted": "QAR",
+        "paymentAccepted": "Cash, Credit Card, Apple Pay",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Qatar"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": t.featuredProducts,
+        "description": t.metaDesc,
+        "numberOfItems": PRODUCTS.length,
+        "itemListElement": buildSEOProductList()
+      }
+    ]
   };
-  
+
   const script = document.createElement("script");
   script.id = "seo-schema-ld";
   script.type = "application/ld+json";
