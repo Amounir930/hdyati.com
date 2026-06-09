@@ -690,7 +690,7 @@ function orderProductWhatsApp(prodId) {
   const prod = PRODUCTS.find(p => p.id === prodId);
   if (!prod) return;
   const fullDomain = window.location.origin + window.location.pathname;
-  const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + prod.image;
+  const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + encodeURI(prod.image);
   
   const orderMsg = state.lang === "ar"
     ? `السلام عليكم، أود طلب هذا المنتج من متجر هديتي 🌸\n\nكود المنتج: ${prod.id}\nرابط الصورة: ${imageUrl}`
@@ -920,7 +920,7 @@ function buildWhatsAppLink(name, phone, address, payment, orderNum) {
     const prod = PRODUCTS.find(p => p.id === item.id);
     if (prod) {
       const fullDomain = window.location.origin + window.location.pathname;
-      const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + prod.image;
+      const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + encodeURI(prod.image);
       productsText += `- ${t.genericTitle} (${prod.id}) × ${item.quantity}\n  رابط الصورة: ${imageUrl}\n`;
     }
   });
