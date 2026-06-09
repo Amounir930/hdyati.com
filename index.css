@@ -32,6 +32,7 @@
   --font-en: 'Inter', sans-serif;
   
   --header-height: 80px;
+  --announce-height: 40px;
 }
 
 /* Dark Mode Palette Overrides */
@@ -66,7 +67,7 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
-  padding-top: calc(var(--header-height) + 40px); /* Account for fixed header + nav */
+  padding-top: calc(var(--announce-height) + var(--header-height) + 40px); /* Account for fixed bar + header + nav */
 }
 
 body.lang-en {
@@ -81,7 +82,7 @@ a {
 /* --- STORE HEADER --- */
 .store-header {
   position: fixed;
-  top: 0;
+  top: var(--announce-height);
   left: 0;
   width: 100%;
   height: var(--header-height);
@@ -256,7 +257,7 @@ body[dir="rtl"] .cart-badge {
 /* --- STORE NAVIGATION MENU --- */
 .store-nav {
   position: fixed;
-  top: var(--header-height);
+  top: calc(var(--announce-height) + var(--header-height));
   left: 0;
   width: 100%;
   background: var(--card-bg);
@@ -1117,7 +1118,7 @@ body[dir="rtl"] .toast-msg {
 /* --- RESPONSIVENESS AND SMALL SCREEN --- */
 @media (max-width: 768px) {
   body {
-    padding-top: calc(var(--header-height) + 60px);
+    padding-top: calc(var(--announce-height) + var(--header-height) + 60px);
   }
   
   .header-container {
@@ -1213,14 +1214,19 @@ body[dir="rtl"] .toast-msg {
 
 /* ===== ANNOUNCEMENT BAR (Instagram Bio) ===== */
 .announce-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--announce-height);
   background: linear-gradient(90deg, var(--primary-reverse) 0%, #8a3d8d 50%, var(--primary-reverse) 100%);
   color: #fff;
   font-size: 0.82rem;
   font-weight: 600;
-  padding: 9px 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  position: relative;
   z-index: 1000;
   letter-spacing: 0.01em;
 }
