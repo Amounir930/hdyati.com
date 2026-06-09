@@ -363,7 +363,7 @@ const TRANSLATIONS = {
     btnBackHome: "تصفح مزيد من تشكيلاتنا",
     footerDesc: "هديتي للورود وتجهيز المناسبات — نقدم أجمل باقات الورد وتنسيقات الهدايا الراقية مع توصيل سريع لجميع مناطق قطر. اطلب الآن عبر واتساب.",
     footerContact: "تواصل معنا",
-    footerAddress: "الخريطيات-الشارع التجارى-مقابل البنك التجاري - بنايه رقم ٤٥ مكتب رقم ١\u200f",
+    footerAddress: "الخريطيات-الشارع التجارى-مقابل البنك التجاري - بنايه رقم ٤٥ مكتب رقم ١",
     footerRights: "جميع الحقوق محفوظة © هديتي 2026 | قطر | @hdyati22",
     heroTitle: "هديتي للورود وتجهيز المناسبات",
     heroSub: "في شركة هديتي، نؤمن أن الهدية ليست مجرد غرض، بل هي مشاعر تُنقل. منذ تأسيسنا عام 2021، نتميز بصياغة أجمل اللحظات من خلال باقات وتوزيعات المواليد الفاخرة، وعقود وباقات التخرج الساحرة، وهدايا أعياد الميلاد المبتكرة، إلى جانب ترتيب مناسباتكم وتجهيز حفلاتكم بأرقى التصاميم، وأفخم تشكيلات الشيكولاتة والكيك. كل هذا يقدمه لكم فريق من أمهر منسقي الورود المحترفين لنضمن لكم لمسات فنية راقية، مع الالتزام بتقديم أفضل الأسعار وأسرع خدمة توصيل تغطي جميع مناطق قطر لتلبي تطلعاتكم وتصنع ذكريات لا تُنسى.",
@@ -987,7 +987,7 @@ function updateStaticTexts(t) {
   
   elements.footerDesc.innerText = t.footerDesc;
   elements.footerContactH.innerText = t.footerContact;
-  elements.footerAddressText.innerHTML = `<i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> <a href="https://maps.google.com/?q=25.395779,51.422497" target="_blank" dir="${state.lang === "ar" ? "rtl" : "ltr"}" style="text-decoration: underline;">${t.footerAddress}</a>`;
+  elements.footerAddressText.innerHTML = `<a href="https://maps.google.com/?q=25.395779,51.422497" target="_blank" style="text-decoration: underline;">${t.footerAddress}</a>`;
   elements.footerRightsText.innerText = t.footerRights;
 }
 
