@@ -11,11 +11,12 @@
   <meta property="og:url" content="https://hdyati.com/">
   <meta name="keywords" content="هديتي, ورود قطر, تنسيق مناسبات, هدايا قطر, ورود الدوحة, مواليد قطر, باقات ورد, فازات ورد, توصيل ورود قطر">
   
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- FontAwesome Icons - Deferred for faster page rendering -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="./index.css?v=2.4">
+  <link rel="stylesheet" href="./index.css?v=2.5">
 </head>
 <body>
 
@@ -53,7 +54,7 @@
       
       <!-- Logo and Brand Title -->
       <div class="logo-area">
-        <img src="photo/logo.png" alt="هديتي" class="logo-img" onerror="this.src='photo/logo.png'">
+        <img src="photo/logo.png" alt="هديتي" class="logo-img" width="48" height="48" onerror="this.src='photo/logo.png'">
         <div class="brand-text">
           <h1 data-i18n="brand_name">هديتي</h1>
           <p data-i18n="brand_sub">للورود وتجهيز المناسبات في قطر</p>
@@ -90,11 +91,8 @@
     
     <!-- HERO SLIDER SECTION WITH VIDEO BACKGROUND -->
     <section class="hero-section">
-      <div class="hero-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
-          <source src="photo/WhatsApp Video 2026-06-09 at 8.59.28 AM.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <div class="hero-video-container" id="hero-video-wrap" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <!-- Loaded dynamically on desktop to save mobile bandwidth -->
       </div>
       <div class="hero-overlay" style="z-index: 2;"></div>
       <div class="hero-content" style="position: relative; z-index: 3;">
@@ -137,7 +135,7 @@
       
       <div class="footer-about">
         <div class="logo-area">
-          <img src="photo/logo.png" alt="هديتي" class="logo-img-footer" onerror="this.src='photo/logo.png'">
+          <img src="photo/logo.png" alt="هديتي" class="logo-img-footer" width="36" height="36" onerror="this.src='photo/logo.png'">
           <h3 data-i18n="brand_name">هديتي</h3>
         </div>
         <p id="footer-desc" data-i18n="footerDesc">
@@ -278,6 +276,6 @@
   </a>
 
   <!-- Main Application Logic Script -->
-  <script src="./app.js?v=2.4"></script>
+  <script src="./app.js?v=2.5"></script>
 </body>
 </html>
