@@ -328,8 +328,8 @@ const PRODUCTS = [
 // --- TRANSLATIONS DICTIONARY ---
 const TRANSLATIONS = {
   ar: {
-    siteTitle: "هديتي | ورود وتجهيز مناسبات قطر — توصيل لجميع المناطق",
-    metaDesc: "هديتي للورود وتجهيز المناسبات في قطر. يوجد توصيل لجميع مناطق قطر. للطلب تواصل معنا عبر واتساب 77403038. الخريطيات - الشارع التجاري - مقابل البنك التجاري.",
+    siteTitle: "هديتي للورود وتجهيز المناسبات 📞 77403038",
+    metaDesc: "هديتي (هديتى) للورود وتجهيز المناسبات في قطر. نوفر أجمل باقات الورد وتنسيقات الهدايا الراقية مع خدمة توصيل سريعة لجميع مناطق قطر. للطلب تواصل معنا عبر واتساب 77403038.",
     navHome: "الرئيسية",
     navGrad: "باقات التخرج",
     navPromo: "تهنئة ترقية",
@@ -386,8 +386,8 @@ const TRANSLATIONS = {
     working_hours_val: "السبت إلى الخميس 9:00 ص إلى 10:00 مساءً | الجمعة 3:00 ظهراً إلى 10:00 مساءً"
   },
   en: {
-    siteTitle: "Hdyati | Flowers & Events in Qatar — Delivery All Areas",
-    metaDesc: "Hdyati (@hdyati22) — Flowers & event arrangements in Qatar. Delivery to all Qatar areas. Order via WhatsApp 77403038. Al-Kharaitiyat, Commercial Street, Doha.",
+    siteTitle: "Hdyati for Flowers & Event Arrangement 📞 77403038",
+    metaDesc: "Hdyati for Flowers & Event Arrangement in Qatar. Delivery to all Qatar areas. Order via WhatsApp 77403038.",
     navHome: "Home",
     navGrad: "Graduation",
     navPromo: "Promotion",
