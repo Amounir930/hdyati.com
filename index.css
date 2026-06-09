@@ -32,7 +32,7 @@
   --font-en: 'Inter', sans-serif;
   
   --header-height: 80px;
-  --announce-height: 40px;
+  --announce-height: 0px;
 }
 
 /* Dark Mode Palette Overrides */
@@ -93,7 +93,7 @@ a {
 /* --- STORE HEADER --- */
 .store-header {
   position: fixed;
-  top: var(--announce-height);
+  top: 0;
   left: 0;
   width: 100%;
   height: var(--header-height);
