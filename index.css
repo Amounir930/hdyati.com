@@ -1270,20 +1270,29 @@ body[dir="rtl"] .toast-msg {
 .announce-inner {
   display: flex;
   align-items: center;
-  gap: 20px;
   white-space: nowrap;
   width: max-content;
+  direction: ltr !important;
+  flex-wrap: nowrap !important;
+}
+
+.announce-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
   padding: 0 10px;
+  flex-shrink: 0;
 }
 
 /* Arabic direction: scrolls left-to-right (enters from left, moves right) */
 body.lang-ar .announce-inner {
-  animation: announce-scroll-right 28s linear infinite;
+  animation: announce-scroll-right 16s linear infinite;
 }
 
 /* English direction: scrolls right-to-left (enters from right, moves left) */
 body.lang-en .announce-inner {
-  animation: announce-scroll-left 28s linear infinite;
+  animation: announce-scroll-left 16s linear infinite;
 }
 
 @keyframes announce-scroll-left {
@@ -1302,6 +1311,13 @@ body.lang-en .announce-inner {
   gap: 5px;
   white-space: nowrap;
 }
+body.lang-ar .announce-item {
+  direction: rtl;
+}
+body.lang-en .announce-item {
+  direction: ltr;
+}
+
 .announce-item i { font-size: 0.85rem; opacity: 0.9; }
 .announce-item a {
   color: #ffe9ff;
@@ -1316,8 +1332,11 @@ body.lang-en .announce-inner {
 }
 @media (max-width: 600px) {
   .announce-inner {
-    gap: 15px;
     font-size: 0.75rem;
+  }
+  .announce-track {
+    gap: 15px;
+    padding: 0 7.5px;
   }
 }
 
