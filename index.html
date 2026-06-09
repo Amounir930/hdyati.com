@@ -22,6 +22,7 @@
   <!-- ANNOUNCEMENT BAR (Bio from @hdyati22) -->
   <div class="announce-bar">
     <div class="announce-inner">
+      <!-- Track 1 -->
       <span class="announce-item"><i class="fas fa-heart"></i> <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
       <span class="announce-dot">•</span>
       <span class="announce-item"><i class="fab fa-whatsapp"></i> <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
@@ -29,6 +30,20 @@
       <span class="announce-item"><i class="fas fa-phone"></i> <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
       <span class="announce-dot">•</span>
       <span class="announce-item"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
+      
+      <!-- Track 2 (Duplicate for loop) -->
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fas fa-heart"></i> <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fab fa-whatsapp"></i> <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fas fa-phone"></i> <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
+      <span class="announce-dot">•</span>
+      <span class="announce-item"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
     </div>
   </div>
 
@@ -45,11 +60,6 @@
         </div>
       </div>
       
-      <!-- Search Input Container -->
-      <div class="search-container">
-        <input type="text" id="search-bar" class="search-input" placeholder="عن ماذا تبحث اليوم؟">
-        <button id="search-btn" class="search-btn" data-i18n="btnSearch">بحث</button>
-      </div>
       
       <!-- Utility Actions -->
       <div class="actions-area">
@@ -146,26 +156,10 @@
       
       <div class="footer-contact">
         <h3 id="footer-contact-h" data-i18n="footerContact">تواصل معنا</h3>
-        <p id="footer-address-text"><i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> <span data-i18n="footerAddress">الخريطيات - الشارع التجاري - مقابل البنك التجاري، الدوحة، قطر</span></p>
+        <p id="footer-address-text"><i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> <a href="https://maps.google.com/?q=25.395779,51.422497" target="_blank" data-i18n="footerAddress" dir="rtl" style="text-decoration: underline;">الخريطيات-الشارع التجارى-مقابل البنك التجاري - بنايه رقم ٤٥ مكتب رقم ١&rlm;</a></p>
         <p><i class="fab fa-whatsapp"></i> <span data-i18n="info_phone_lbl">واتساب:</span> <a href="https://wa.me/97477403038" target="_blank" style="color: var(--primary); font-weight: 700;">77403038</a></p>
         <p><i class="fab fa-instagram"></i> <span data-i18n="info_ig_lbl">إنستجرام:</span> <a href="https://www.instagram.com/hdyati22/" target="_blank" style="color: var(--primary); font-weight: 700;">@hdyati22</a></p>
-        <a href="https://wa.me/97477403038" target="_blank" class="footer-order-btn">
-          <i class="fab fa-whatsapp"></i> <span data-i18n="btnCheckout">اطلب الآن عبر واتساب</span>
-        </a>
-      </div>
-      
-      <div class="footer-payment">
-        <h3 data-i18n="payment_methods">طرق الدفع المقبولة</h3>
-        <div class="payment-logos">
-          <img src="https://cdn.assets.salla.network/images/payment/apple-pay.png" alt="Apple Pay">
-          <img src="https://cdn.assets.salla.network/images/payment/mada.png" alt="mada">
-          <img src="https://cdn.assets.salla.network/images/payment/visa.png" alt="Visa">
-          <img src="https://cdn.assets.salla.network/images/payment/mastercard.png" alt="Mastercard">
-        </div>
-        <div class="commercial-register-box">
-          <i class="fas fa-certificate" style="font-size:1.5rem; color: var(--accent-gold);"></i>
-          <span style="font-size: 0.8rem;" data-i18n="cr_notice">موثق في قطر | السجل التجاري رقم: 1049756</span>
-        </div>
+        <p><i class="far fa-clock" style="margin-left: 8px; margin-right: 8px;"></i> <span data-i18n="working_hours_lbl">أوقات العمل:</span> <span data-i18n="working_hours_val">السبت إلى الخميس 9:00 ص إلى 10:00 مساءً | الجمعة 3:00 ظهراً إلى 10:00 مساءً</span></p>
       </div>
 
     </div>
@@ -277,6 +271,11 @@
     <i class="fas fa-check-circle"></i>
     <span>تمت إضافة المنتج بنجاح!</span>
   </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/97477403038" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contact Hdyati on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <!-- Main Application Logic Script -->
   <script src="./app.js"></script>

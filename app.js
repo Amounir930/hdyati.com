@@ -341,7 +341,7 @@ const TRANSLATIONS = {
     searchPlaceholder: "ابحث عن باقة ورد، تنسيق، أو هدية...",
     cartTitle: "طلبك من هديتي",
     cartEmpty: "سلتك فارغة حالياً — اختر من منتجاتنا الجميلة!",
-    btnAddToCart: "أضف للطلب",
+    btnAddToCart: "اطلب الآن",
     btnAddedToCart: "تمت الإضافة ✔",
     btnCheckout: "أكمل طلبك عبر واتساب",
     btnContinueShopping: "تصفح المزيد",
@@ -363,16 +363,27 @@ const TRANSLATIONS = {
     btnBackHome: "تصفح مزيد من تشكيلاتنا",
     footerDesc: "هديتي للورود وتجهيز المناسبات — نقدم أجمل باقات الورد وتنسيقات الهدايا الراقية مع توصيل سريع لجميع مناطق قطر. اطلب الآن عبر واتساب.",
     footerContact: "تواصل معنا",
-    footerAddress: "الخريطيات - الشارع التجاري - مقابل البنك التجاري، الدوحة، قطر",
+    footerAddress: "الخريطيات-الشارع التجارى-مقابل البنك التجاري - بنايه رقم ٤٥ مكتب رقم ١\u200f",
     footerRights: "جميع الحقوق محفوظة © هديتي 2026 | قطر | @hdyati22",
     heroTitle: "هديتي للورود وتجهيز المناسبات",
-    heroSub: "يوجد توصيل لجميع مناطق قطر 🇶🇦 — للطلب تواصل معنا عبر واتساب وسيتم الرد عليك فوراً لتنسيق طلبك.",
+    heroSub: "في شركة هديتي، نؤمن أن الهدية ليست مجرد غرض، بل هي مشاعر تُنقل. منذ تأسيسنا عام 2021، نتميز بصياغة أجمل اللحظات من خلال باقات وتوزيعات المواليد الفاخرة، وعقود وباقات التخرج الساحرة، وهدايا أعياد الميلاد المبتكرة، إلى جانب ترتيب مناسباتكم وتجهيز حفلاتكم بأرقى التصاميم، وأفخم تشكيلات الشيكولاتة والكيك. كل هذا يقدمه لكم فريق من أمهر منسقي الورود المحترفين لنضمن لكم لمسات فنية راقية، مع الالتزام بتقديم أفضل الأسعار وأسرع خدمة توصيل تغطي جميع مناطق قطر لتلبي تطلعاتكم وتصنع ذكريات لا تُنسى.",
     catAll: "الكل",
     sortBy: "تصفية",
     sortPopular: "الأكثر طلباً",
     toastAdded: "تمت إضافة المنتج إلى طلبك!",
     featuredProducts: "تشكيلاتنا المختارة",
-    genericTitle: "تنسيق راقي"
+    genericTitle: "تنسيق راقي",
+    announce_title: "هديتي للورود وتجهيز المناسبات",
+    announce_shipping: "يوجد توصيل لجميع مناطق قطر",
+    announce_location: "الموقع",
+    brand_name: "هديتي",
+    brand_sub: "للورود وتجهيز المناسبات في قطر",
+    ig_followers: "متابع",
+    ig_posts: "منشور",
+    info_phone_lbl: "واتساب:",
+    info_ig_lbl: "إنستجرام:",
+    working_hours_lbl: "أوقات العمل:",
+    working_hours_val: "السبت إلى الخميس 9:00 ص إلى 10:00 مساءً | الجمعة 3:00 ظهراً إلى 10:00 مساءً"
   },
   en: {
     siteTitle: "Hdyati | Flowers & Events in Qatar — Delivery All Areas",
@@ -389,7 +400,7 @@ const TRANSLATIONS = {
     genericTitle: "Elegant Arrangement",
     cartTitle: "Your Order",
     cartEmpty: "Your cart is empty — browse our beautiful arrangements!",
-    btnAddToCart: "Add to Order",
+    btnAddToCart: "Order Now",
     btnAddedToCart: "Added ✔",
     btnCheckout: "Complete Order via WhatsApp",
     btnContinueShopping: "Browse More",
@@ -411,15 +422,26 @@ const TRANSLATIONS = {
     btnBackHome: "Browse More Arrangements",
     footerDesc: "Hdyati (@hdyati22) — Flowers & event arrangements with delivery to all Qatar areas. Order via WhatsApp.",
     footerContact: "Contact Us",
-    footerAddress: "Al-Kharaitiyat, Commercial Street, Opposite Commercial Bank, Doha, Qatar",
+    footerAddress: "Al-Kharaitiyat, Commercial Street, Opposite Commercial Bank, Building No. 45, Office No. 1",
     footerRights: "All rights reserved © Hdyati 2026 | Qatar | @hdyati22",
     heroTitle: "Hdyati — Flowers & Event Arrangements",
-    heroSub: "Delivery to all Qatar areas 🇶🇦 — Order via WhatsApp and we'll contact you right away ⬇️",
+    heroSub: "At Hdyati, we believe that a gift is not just an item, but a transfer of feelings. Since our establishment in 2021, we have excelled in crafting the most beautiful moments through luxury newborn arrangements and giveaways, charming graduation bouquets and collars, and innovative birthday gifts, alongside arranging your special occasions and events with the finest designs, and the most luxurious selections of chocolates and cakes. All of this is presented to you by a team of the most skilled professional florists to ensure elegant artistic touches, with a commitment to providing the best prices and the fastest delivery service covering all regions of Qatar to meet your expectations and make unforgettable memories.",
     catAll: "All",
     sortBy: "Filter",
     sortPopular: "Most Popular",
     toastAdded: "Added to your order!",
-    featuredProducts: "Our Arrangements"
+    featuredProducts: "Our Arrangements",
+    announce_title: "Hdyati for Flowers & Events",
+    announce_shipping: "Delivery to all regions of Qatar",
+    announce_location: "Location",
+    brand_name: "Hdyati",
+    brand_sub: "Flowers & Event Arrangements in Qatar",
+    ig_followers: "followers",
+    ig_posts: "posts",
+    info_phone_lbl: "WhatsApp:",
+    info_ig_lbl: "Instagram:",
+    working_hours_lbl: "Working Hours:",
+    working_hours_val: "Saturday to Thursday 9:00 AM - 10:00 PM | Friday 3:00 PM - 10:00 PM"
   }
 };
 
@@ -529,10 +551,14 @@ function bindEvents() {
   elements.langBtn.addEventListener("click", toggleLanguage);
   elements.themeBtn.addEventListener("click", toggleTheme);
   
-  elements.searchBtn.addEventListener("click", performSearch);
-  elements.searchBar.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") performSearch();
-  });
+  if (elements.searchBtn) {
+    elements.searchBtn.addEventListener("click", performSearch);
+  }
+  if (elements.searchBar) {
+    elements.searchBar.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") performSearch();
+    });
+  }
   
   elements.sortSelect.addEventListener("change", (e) => {
     state.sortBy = e.target.value;
@@ -645,6 +671,20 @@ function filterAndSortProducts() {
   return filtered.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0));
 }
 
+function orderProductWhatsApp(prodId) {
+  const prod = PRODUCTS.find(p => p.id === prodId);
+  if (!prod) return;
+  const fullDomain = window.location.origin + window.location.pathname;
+  const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + prod.image;
+  
+  const orderMsg = state.lang === "ar"
+    ? `السلام عليكم، أود طلب هذا المنتج من متجر هديتي 🌸\n\nكود المنتج: ${prod.id}\nرابط الصورة: ${imageUrl}`
+    : `Hello, I would like to order this product from Hdyati Store 🌸\n\nProduct Code: ${prod.id}\nImage Link: ${imageUrl}`;
+  
+  const waUrl = `https://wa.me/97477403038?text=${encodeURIComponent(orderMsg)}`;
+  window.open(waUrl, "_blank");
+}
+
 function createProductCard(prod, t) {
   const card = document.createElement("article");
   card.className = "product-card";
@@ -655,7 +695,7 @@ function createProductCard(prod, t) {
     <div class="product-card-content">
       <div class="product-card-footer">
         <button class="add-to-cart-btn" data-id="${prod.id}">
-          <i class="fas fa-shopping-bag"></i> <span>${t.btnAddToCart}</span>
+          <i class="fab fa-whatsapp"></i> <span>${t.btnAddToCart}</span>
         </button>
       </div>
     </div>
@@ -667,7 +707,7 @@ function createProductCard(prod, t) {
   
   card.querySelector(".add-to-cart-btn").addEventListener("click", (e) => {
     e.stopPropagation();
-    addToCart(prod.id, e.currentTarget);
+    orderProductWhatsApp(prod.id);
   });
   
   return card;
@@ -912,7 +952,7 @@ function updateLanguageUI() {
   document.title = t.siteTitle;
   
   elements.body.className = `${state.theme === "dark" ? "dark-mode" : ""} lang-${state.lang}`;
-  elements.langBtn.innerHTML = state.lang === "ar" ? `<i class="fas fa-globe"></i> English` : `<i class="fas fa-globe"></i> العربية`;
+  elements.langBtn.innerHTML = state.lang === "ar" ? `<i class="fas fa-globe"></i> <span class="btn-text">English</span>` : `<i class="fas fa-globe"></i> <span class="btn-text">العربية</span>`;
   
   updateStaticTexts(t);
   updateCheckoutLabels(t);
@@ -923,8 +963,16 @@ function updateLanguageUI() {
 }
 
 function updateStaticTexts(t) {
-  elements.searchBar.placeholder = t.searchPlaceholder;
-  elements.searchBtn.innerText = t.btnSearch;
+  // Translate all static elements decorated with data-i18n
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+
+  if (elements.searchBar) elements.searchBar.placeholder = t.searchPlaceholder;
+  if (elements.searchBtn) elements.searchBtn.innerText = t.btnSearch;
   
   elements.heroTitle.innerText = t.heroTitle;
   elements.heroSub.innerText = t.heroSub;
@@ -939,7 +987,7 @@ function updateStaticTexts(t) {
   
   elements.footerDesc.innerText = t.footerDesc;
   elements.footerContactH.innerText = t.footerContact;
-  elements.footerAddressText.innerHTML = `<i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> ${t.footerAddress}`;
+  elements.footerAddressText.innerHTML = `<i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> <a href="https://maps.google.com/?q=25.395779,51.422497" target="_blank" dir="${state.lang === "ar" ? "rtl" : "ltr"}" style="text-decoration: underline;">${t.footerAddress}</a>`;
   elements.footerRightsText.innerText = t.footerRights;
 }
 
@@ -972,10 +1020,10 @@ function toggleTheme() {
 function updateThemeUI() {
   if (state.theme === "dark") {
     elements.body.classList.add("dark-mode");
-    elements.themeBtn.innerHTML = `<i class="fas fa-sun"></i> Light Mode`;
+    elements.themeBtn.innerHTML = `<i class="fas fa-sun"></i> <span class="btn-text">Light Mode</span>`;
   } else {
     elements.body.classList.remove("dark-mode");
-    elements.themeBtn.innerHTML = `<i class="fas fa-moon"></i> Dark Mode`;
+    elements.themeBtn.innerHTML = `<i class="fas fa-moon"></i> <span class="btn-text">Dark Mode</span>`;
   }
 }
 
