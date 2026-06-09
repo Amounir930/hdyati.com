@@ -371,7 +371,8 @@ const TRANSLATIONS = {
     sortBy: "تصفية",
     sortPopular: "الأكثر طلباً",
     toastAdded: "تمت إضافة المنتج إلى طلبك!",
-    featuredProducts: "تشكيلاتنا المختارة"
+    featuredProducts: "تشكيلاتنا المختارة",
+    genericTitle: "تنسيق راقي"
   },
   en: {
     siteTitle: "Hdyati | Flowers & Events in Qatar — Delivery All Areas",
@@ -385,6 +386,7 @@ const TRANSLATIONS = {
     navGifts: "Gifts & Arrangements",
     btnSearch: "Search",
     searchPlaceholder: "Search bouquets, arrangements, gifts...",
+    genericTitle: "Elegant Arrangement",
     cartTitle: "Your Order",
     cartEmpty: "Your cart is empty — browse our beautiful arrangements!",
     btnAddToCart: "Add to Order",
@@ -440,13 +442,6 @@ const elements = {
   themeBtn: document.getElementById("theme-btn"),
   
   // Navigation & Search
-  navHome: document.getElementById("nav-home"),
-  navGrad: document.getElementById("nav-grad"),
-  navPromo: document.getElementById("nav-promo"),
-  navWedding: document.getElementById("nav-wedding"),
-  navBirthday: document.getElementById("nav-birthday"),
-  navHajj: document.getElementById("nav-hajj"),
-  navGifts: document.getElementById("nav-gifts"),
   searchBar: document.getElementById("search-bar"),
   searchBtn: document.getElementById("search-btn"),
   
@@ -534,8 +529,6 @@ function bindEvents() {
   elements.langBtn.addEventListener("click", toggleLanguage);
   elements.themeBtn.addEventListener("click", toggleTheme);
   
-  bindNavigationLinks();
-  
   elements.searchBtn.addEventListener("click", performSearch);
   elements.searchBar.addEventListener("keyup", (e) => {
     if (e.key === "Enter") performSearch();
@@ -566,28 +559,7 @@ function bindEvents() {
   bindLightboxEvents();
 }
 
-// Bind Navigation clicks
-function bindNavigationLinks() {
-  const menuItems = [
-    { el: elements.navHome, cat: "all" },
-    { el: elements.navGrad, cat: "تخرج" },
-    { el: elements.navPromo, cat: "ترقية" },
-    { el: elements.navWedding, cat: "زواج" },
-    { el: elements.navBirthday, cat: "ميلاد" },
-    { el: elements.navHajj, cat: "حج" },
-    { el: elements.navGifts, cat: "هدية" }
-  ];
-  
-  menuItems.forEach(item => {
-    if (item.el) {
-      item.el.addEventListener("click", (e) => {
-        e.preventDefault();
-        setCategory(item.cat);
-        elements.productsGrid.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-  });
-}
+// Navigation link clicks are handled by the category horizontal links scroll
 
 // Bind Lightbox modal events
 function bindLightboxEvents() {
@@ -678,10 +650,9 @@ function createProductCard(prod, t) {
   card.className = "product-card";
   card.innerHTML = `
     <div class="product-card-image" style="cursor: pointer;">
-      <img class="lazy-image" src="${prod.image}" alt="${prod.title[state.lang]}" loading="lazy">
+      <img class="lazy-image" src="${prod.image}" alt="${t.genericTitle}" loading="lazy">
     </div>
     <div class="product-card-content">
-      <h3 class="product-title">${prod.title[state.lang]}</h3>
       <div class="product-card-footer">
         <button class="add-to-cart-btn" data-id="${prod.id}">
           <i class="fas fa-shopping-bag"></i> <span>${t.btnAddToCart}</span>
@@ -757,10 +728,11 @@ function animateAddToCartButton(buttonEl, t) {
 function createCartItemRow(item, prod) {
   const div = document.createElement("div");
   div.className = "cart-item";
+  const t = TRANSLATIONS[state.lang];
   div.innerHTML = `
-    <img src="${prod.image}" alt="${prod.title[state.lang]}">
+    <img src="${prod.image}" alt="${t.genericTitle}">
     <div class="cart-item-details">
-      <h4>${prod.title[state.lang]}</h4>
+      <h4>${t.genericTitle} (${prod.id})</h4>
       <div class="cart-item-qty-ctrl">
         <button class="qty-btn minus" data-id="${item.id}"><i class="fas fa-minus"></i></button>
         <span>${item.quantity}</span>
@@ -864,13 +836,14 @@ function handleCheckoutSubmit(e) {
 }
 
 function buildReceiptHtml() {
+  const t = TRANSLATIONS[state.lang];
   let html = `<div style="display:flex; flex-direction:column; gap:8px;">`;
   state.cart.forEach(item => {
     const prod = PRODUCTS.find(p => p.id === item.id);
     if (prod) {
       html += `
         <div style="display:flex; justify-content:space-between; font-size:0.88rem; border-bottom:1px dashed #eee; padding-bottom:6px;">
-          <span>${prod.title[state.lang]}</span>
+          <span>${t.genericTitle} (${prod.id})</span>
           <strong style="color:var(--primary);">× ${item.quantity}</strong>
         </div>
       `;
@@ -886,11 +859,14 @@ function buildWhatsAppLink(name, phone, address, payment, orderNum) {
   else if (payment === "card") payText = state.lang === "ar" ? "بطاقة ائتمان / مدى" : "Credit Card / Debit";
   else payText = state.lang === "ar" ? "الدفع عند الاستلام" : "Cash on Delivery";
 
+  const t = TRANSLATIONS[state.lang];
   let productsText = "";
   state.cart.forEach(item => {
     const prod = PRODUCTS.find(p => p.id === item.id);
     if (prod) {
-      productsText += `- ${prod.title[state.lang]} × ${item.quantity}\n`;
+      const fullDomain = window.location.origin + window.location.pathname;
+      const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + prod.image;
+      productsText += `- ${t.genericTitle} (${prod.id}) × ${item.quantity}\n  رابط الصورة: ${imageUrl}\n`;
     }
   });
 

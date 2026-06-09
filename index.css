@@ -67,7 +67,7 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
-  padding-top: calc(var(--announce-height) + var(--header-height) + 40px); /* Account for fixed bar + header + nav */
+  padding-top: calc(var(--announce-height) + var(--header-height)); /* Account for fixed bar + header */
 }
 
 body.lang-en {
@@ -317,10 +317,11 @@ body.dark-mode .nav-link::after {
 /* --- HERO BANNER SECTION --- */
 .hero-section {
   position: relative;
-  max-width: 1300px;
-  margin: 0 auto 30px auto;
-  height: 380px;
-  border-radius: 24px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 30px 0;
+  height: calc(100vh - var(--announce-height) - var(--header-height));
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1118,7 +1119,7 @@ body[dir="rtl"] .toast-msg {
 /* --- RESPONSIVENESS AND SMALL SCREEN --- */
 @media (max-width: 768px) {
   body {
-    padding-top: calc(var(--announce-height) + var(--header-height) + 60px);
+    padding-top: calc(var(--announce-height) + var(--header-height));
   }
   
   .header-container {
@@ -1138,7 +1139,7 @@ body[dir="rtl"] .toast-msg {
   }
   
   .hero-section {
-    height: 250px;
+    height: calc(100vh - var(--announce-height) - var(--header-height));
   }
   
   .hero-content {
