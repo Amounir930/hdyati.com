@@ -1266,6 +1266,20 @@ body[dir="rtl"] .toast-msg {
   overflow: hidden;
   z-index: 1000;
   letter-spacing: 0.01em;
+  /* Hardware acceleration: keeps bar fixed during mobile momentum scrolling */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+@media (max-width: 768px) {
+  /* Reinforce fixed positioning on mobile browsers */
+  .announce-bar {
+    position: -webkit-sticky;
+    position: fixed !important;
+    top: 0 !important;
+  }
 }
 .announce-inner {
   display: flex;

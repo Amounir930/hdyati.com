@@ -535,16 +535,14 @@ function init() {
 }
 
 function initHeroVideo() {
-  // Only inject the heavy video element on screens wider than 768px to save mobile bandwidth
-  if (window.innerWidth > 768) {
-    const videoWrap = document.getElementById("hero-video-wrap");
-    if (videoWrap) {
-      videoWrap.innerHTML = `
-        <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
-          <source src="photo/WhatsApp Video 2026-06-09 at 8.59.28 AM.mp4" type="video/mp4">
-        </video>
-      `;
-    }
+  // Load video on all screen sizes (mobile: small size, desktop: full resolution)
+  const videoWrap = document.getElementById("hero-video-wrap");
+  if (videoWrap) {
+    videoWrap.innerHTML = `
+      <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+        <source src="photo/WhatsApp Video 2026-06-09 at 8.59.28 AM.mp4" type="video/mp4">
+      </video>
+    `;
   }
 }
 
