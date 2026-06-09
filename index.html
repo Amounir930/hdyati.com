@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'none';">
   <meta name="referrer" content="no-referrer-when-downgrade">
   <title>هديتي | متجر ورود وتجهيز المناسبات في قطر — توصيل لجميع المناطق</title>
   <meta name="description" content="هديتي للورود وتجهيز المناسبات في قطر. يوجد توصيل لجميع مناطق قطر. للطلب تواصل معنا عبر واتساب 77403038. الخريطيات - الشارع التجاري - مقابل البنك التجاري.">
@@ -18,7 +18,7 @@
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="./index.css?v=2.9">
+  <link rel="stylesheet" href="./index.css?v=3.0">
 </head>
 <body>
 
@@ -267,7 +267,7 @@
       <button id="lightbox-close" class="modal-close-btn" style="color: #fff; background: rgba(0,0,0,0.6); border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; position: absolute; top: -55px; right: 0; cursor: pointer;" aria-label="Close Lightbox">
         <i class="fas fa-times"></i>
       </button>
-      <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Product Showcase" width="600" height="800" style="max-width: 100%; max-height: 80vh; border-radius: 16px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: block; object-fit: contain; background: rgba(0,0,0,0.2);">
+      <img id="lightbox-img" src="photo/logo.png" alt="Product Showcase" width="600" height="800" style="max-width: 100%; max-height: 80vh; border-radius: 16px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: block; object-fit: contain; background: rgba(0,0,0,0.2);">
     </div>
   </div>
 
@@ -283,6 +283,6 @@
   </a>
 
   <!-- Main Application Logic Script -->
-  <script src="./app.js?v=2.9"></script>
+  <script src="./app.js?v=3.0"></script>
 </body>
 </html>
