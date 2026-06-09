@@ -13,42 +13,43 @@
   <meta property="og:url" content="https://hdyati.com/">
   <meta name="keywords" content="هديتي, ورود قطر, تنسيق مناسبات, هدايا قطر, ورود الدوحة, مواليد قطر, باقات ورد, فازات ورد, توصيل ورود قطر">
   
-  <!-- FontAwesome Icons - Direct load for instant announcement bar icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <!-- FontAwesome Icons - Deferred (announce bar now uses emoji, no FA dependency) -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="./index.css?v=3.2">
+  <link rel="stylesheet" href="./index.css?v=3.3">
 </head>
 <body>
 
   <!-- ANNOUNCEMENT BAR (Bio from @hdyati22) -->
   <div class="announce-bar">
     <div class="announce-inner">
-      <!-- Track 1 -->
+      <!-- Track 1 — uses Unicode emoji (no FontAwesome dependency = instant render) -->
       <div class="announce-track">
-        <span class="announce-item"><i class="fas fa-heart"></i> <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
+        <span class="announce-item">🌸 <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fab fa-whatsapp"></i> <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
+        <span class="announce-item">🚚 <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fas fa-phone"></i> <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
+        <span class="announce-item">💬 <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
+        <span class="announce-item">📸 <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
+        <span class="announce-item">📍 <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
         <span class="announce-dot">•</span>
       </div>
-      
-      <!-- Track 2 (Duplicate for loop) -->
+
+      <!-- Track 2 (Duplicate for seamless loop) -->
       <div class="announce-track">
-        <span class="announce-item"><i class="fas fa-heart"></i> <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
+        <span class="announce-item">🌸 <span data-i18n="announce_title">هديتي للورود وتجهيز المناسبات</span></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fab fa-whatsapp"></i> <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
+        <span class="announce-item">🚚 <span data-i18n="announce_shipping">يوجد توصيل لجميع مناطق قطر</span></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fas fa-phone"></i> <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
+        <span class="announce-item">💬 <a href="https://wa.me/97477403038" target="_blank">77403038</a></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
+        <span class="announce-item">📸 <a href="https://www.instagram.com/hdyati22/" target="_blank">@hdyati22</a></span>
         <span class="announce-dot">•</span>
-        <span class="announce-item"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
+        <span class="announce-item">📍 <a href="https://maps.app.goo.gl/mS9hyzkFHLKMRhLc7" target="_blank" data-i18n="announce_location">الموقع</a></span>
         <span class="announce-dot">•</span>
       </div>
     </div>
@@ -282,6 +283,6 @@
   </a>
 
   <!-- Main Application Logic Script -->
-  <script src="./app.js?v=3.2"></script>
+  <script src="./app.js?v=3.3"></script>
 </body>
 </html>
