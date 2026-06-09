@@ -694,18 +694,18 @@ function renderGallery(filter) {
     const catText = translations[currentLang][`cat_${prod.category === "ميلاد" ? "birthday" : prod.category === "حج" ? "hajj" : prod.category === "زواج" ? "wedding" : prod.category === "تخرج" ? "grad" : prod.category === "ترقية" ? "promo" : "gifts"}`];
     
     card.innerHTML = `
-      <div class="gallery-img-wrapper">
+      <div class="gallery-img-wrapper" onclick="openQuickView('${prod.id}')">
         <img class="gallery-img" src="${prod.img}" alt="${title}" loading="lazy">
         <div class="gallery-img-overlay">
-          <button class="gallery-action-btn" onclick="openQuickView('${prod.id}')" aria-label="${translations[currentLang].quick_view_btn}">
+          <span class="gallery-action-btn" aria-label="${translations[currentLang].quick_view_btn}">
             <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+          </span>
         </div>
       </div>
-      <div class="gallery-info">
+      <div class="gallery-info" onclick="openQuickView('${prod.id}')">
         <span class="gallery-cat">${catText}</span>
         <h3 class="gallery-title">${title}</h3>
-        <button class="gallery-details-btn" onclick="openQuickView('${prod.id}')">
+        <button class="gallery-details-btn">
           <i class="fa-solid fa-circle-info"></i>
           <span>${translations[currentLang].quick_view_btn}</span>
         </button>
