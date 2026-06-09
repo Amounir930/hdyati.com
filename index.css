@@ -60,9 +60,9 @@ body.dark-mode {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
+html {
+  /* Do NOT set overflow:hidden on html — it breaks position:fixed on iOS Safari */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -72,10 +72,17 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   padding-top: calc(var(--announce-height) + var(--header-height)); /* Account for fixed bar + header */
+  /* Do NOT add overflow:hidden here — breaks position:fixed on mobile browsers */
 }
 
 body.lang-en {
   font-family: var(--font-en);
+}
+
+/* Clip horizontal overflow on scrollable content WITHOUT breaking position:fixed */
+.page-wrapper {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 a {
