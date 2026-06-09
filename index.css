@@ -1264,23 +1264,13 @@ body[dir="rtl"] .toast-msg {
   display: flex;
   align-items: center;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1001;
   letter-spacing: 0.01em;
-  /* Hardware acceleration: keeps bar fixed during mobile momentum scrolling */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
+  /* NOTE: Do NOT add transform here — it would break position:fixed on mobile */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-@media (max-width: 768px) {
-  /* Reinforce fixed positioning on mobile browsers */
-  .announce-bar {
-    position: -webkit-sticky;
-    position: fixed !important;
-    top: 0 !important;
-  }
-}
+
 .announce-inner {
   display: flex;
   align-items: center;
@@ -1288,6 +1278,9 @@ body[dir="rtl"] .toast-msg {
   width: max-content;
   direction: ltr !important;
   flex-wrap: nowrap !important;
+  /* Default: Arabic RTL scroll (starts immediately without waiting for JS) */
+  animation: announce-scroll-right 20s linear infinite;
+  will-change: transform;
 }
 
 .announce-track {
@@ -1299,23 +1292,18 @@ body[dir="rtl"] .toast-msg {
   flex-shrink: 0;
 }
 
-/* Arabic direction: scrolls left-to-right (enters from left, moves right) */
-body.lang-ar .announce-inner {
-  animation: announce-scroll-right 16s linear infinite;
-}
-
-/* English direction: scrolls right-to-left (enters from right, moves left) */
+/* English direction override: scrolls right-to-left */
 body.lang-en .announce-inner {
-  animation: announce-scroll-left 16s linear infinite;
+  animation: announce-scroll-left 20s linear infinite;
 }
 
 @keyframes announce-scroll-left {
-  0% { transform: translate3d(0, 0, 0); }
+  0%   { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes announce-scroll-right {
-  0% { transform: translate3d(-50%, 0, 0); }
+  0%   { transform: translate3d(-50%, 0, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
 
@@ -1324,8 +1312,6 @@ body.lang-en .announce-inner {
   align-items: center;
   gap: 5px;
   white-space: nowrap;
-}
-body.lang-ar .announce-item {
   direction: rtl;
 }
 body.lang-en .announce-item {
@@ -1349,10 +1335,11 @@ body.lang-en .announce-item {
     font-size: 0.75rem;
   }
   .announce-track {
-    gap: 15px;
-    padding: 0 7.5px;
+    gap: 12px;
+    padding: 0 6px;
   }
 }
+
 
 /* ===== RESPONSIVE GRID OVERRIDES (MOBILE 2 COLUMNS) ===== */
 @media (max-width: 600px) {
