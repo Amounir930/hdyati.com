@@ -1266,45 +1266,33 @@ body[dir="rtl"] .toast-msg {
   overflow: hidden;
   z-index: 1001;
   letter-spacing: 0.01em;
-  /* NOTE: Do NOT add transform here — it would break position:fixed on mobile */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .announce-inner {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   white-space: nowrap;
-  width: max-content;
-  direction: ltr !important;
-  flex-wrap: nowrap !important;
-  /* Default: Arabic RTL scroll (starts immediately without waiting for JS) */
-  animation: announce-scroll-right 20s linear infinite;
-  will-change: transform;
+  /* Content is IMMEDIATELY visible at t=0 (starts at position 0, not -50%) */
+  animation: announce-marquee 22s linear infinite;
 }
 
 .announce-track {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 20px;
-  white-space: nowrap;
-  padding: 0 10px;
   flex-shrink: 0;
+  gap: 18px;
+  padding: 0 9px;
+  white-space: nowrap;
 }
 
-/* English direction override: scrolls right-to-left */
-body.lang-en .announce-inner {
-  animation: announce-scroll-left 20s linear infinite;
-}
-
-@keyframes announce-scroll-left {
-  0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-
-@keyframes announce-scroll-right {
-  0%   { transform: translate3d(-50%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+/* Single universal animation: scrolls right-to-left (natural Arabic ticker direction)
+   - At 0%: Track 1 is at the left edge → IMMEDIATELY VISIBLE
+   - At 100%: moved left by 50% (one track width) → Track 2 takes Track 1's place
+   - Loop restarts: seamless since Track 1 === Track 2 */
+@keyframes announce-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .announce-item {
@@ -1312,13 +1300,8 @@ body.lang-en .announce-inner {
   align-items: center;
   gap: 5px;
   white-space: nowrap;
-  direction: rtl;
-}
-body.lang-en .announce-item {
-  direction: ltr;
 }
 
-.announce-item i { font-size: 0.85rem; opacity: 0.9; }
 .announce-item a {
   color: #ffe9ff;
   text-decoration: none;
@@ -1327,18 +1310,19 @@ body.lang-en .announce-item {
 }
 .announce-item a:hover { color: #fff; text-decoration: underline; }
 .announce-dot {
-  opacity: 0.5;
-  font-size: 1rem;
+  opacity: 0.6;
+  font-size: 0.9rem;
 }
 @media (max-width: 600px) {
-  .announce-inner {
-    font-size: 0.75rem;
+  .announce-bar {
+    font-size: 0.78rem;
   }
   .announce-track {
-    gap: 12px;
-    padding: 0 6px;
+    gap: 14px;
+    padding: 0 7px;
   }
 }
+
 
 
 /* ===== RESPONSIVE GRID OVERRIDES (MOBILE 2 COLUMNS) ===== */
