@@ -1,793 +1,1056 @@
-/**
- * Hdyati Flowers & Gifts - Application Scripts
- * Premium bilingual toggling, dynamic gallery filtering,
- * modal controller, and direct WhatsApp checkout automation.
- */
-
-// --- Translation Dictionary ---
-const translations = {
-  ar: {
-    nav_home: "الرئيسية",
-    nav_about: "من نحن",
-    nav_products: "تصنيفاتنا",
-    nav_contact: "اتصل بنا",
-    cta_order: "اطلب الآن",
-    hero_tag: "مرحبًا بكم في هديتي",
-    hero_title: "الهدية ليست مجرد غرض، بل هي مشاعر تُنقل",
-    hero_desc: "باقات وتوزيعات المواليد الفاخرة، وعقود وباقات التخرج الساحرة، وهدايا أعياد الميلاد المبتكرة وتجهيز حفلاتكم بأرقى التصاميم وأفخم الكيك والشيكولاتة.",
-    hero_btn_explore: "استكشف باقاتنا",
-    hero_btn_contact: "تواصل معنا",
-    about_tag: "قصتنا ولماذا نحن؟",
-    about_title: "نحن نصيغ أجمل اللحظات ونبني ذكريات لا تُنسى",
-    about_p1: "منذ تأسيسنا عام 2021، نتميز بصياغة أجمل اللحظات من خلال باقات وتوزيعات المواليد الفاخرة، وعقود وباقات التخرج الساحرة، وهدايا أعياد الميلاد المبتكرة، إلى جانب ترتيب مناسباتكم وتجهيز حفلاتكم بأرقى التصاميم، وأفخم تشكيلات الشيكولاتة والكيك.",
-    about_p2: "كل هذا يقدمه لكم فريق من أمهر منسقي الورود المحترفين لنضمن لكم لمسات فنية راقية، مع الالتزام بتقديم أفضل الأسعار وأسرع خدمة توصيل تغطي جميع مناطق قطر لتلبي تطلعاتكم وتصنع ذكريات لا تُنسى.",
-    badge_since: "منذ تأسيسنا",
-    features_tag: "مميزاتنا",
-    features_title: "لماذا يختارنا عملاؤنا؟",
-    features_desc: "نسعى دائماً لتقديم الأفضل لضمان تجربة تسوق راقية وتوصيل مشاعركم بأدق التفاصيل.",
-    feat1_title: "لمسات فنية محترفة",
-    feat1_desc: "فريق من أمهر منسقي الورود المحترفين لابتكار تصاميم فريدة تناسب أذواقكم ومناسباتكم.",
-    feat2_title: "توصيل سريع وموثوق",
-    feat2_desc: "خدمة توصيل سريعة تغطي جميع مناطق قطر، لتصل هداياكم طازجة وبأبهى حلة وفي وقتها المحدد.",
-    feat3_title: "أفضل الأسعار والقيمة",
-    feat3_desc: "نجمع بين جودة التنسيق الاستثنائية والأسعار المنافسة التي تلائم تطلعاتكم بدون تنازل.",
-    categories_tag: "معرض أعمالنا",
-    categories_title: "تصفح تصنيفاتنا الاستثنائية",
-    categories_desc: "اختر التصنيف المناسب لمناسبتك وتصفح التشكيلات التي صممناها بكل حب وإتقان.",
-    cat_all: "الكل",
-    cat_grad: "تخرج",
-    cat_promo: "ترقية",
-    cat_wedding: "زواج",
-    cat_birthday: "أعياد ميلاد",
-    cat_hajj: "حج وعمرة",
-    cat_gifts: "هدايا ومناسبات",
-    contact_tag: "تواصل معنا",
-    contact_title: "نسعد بخدمتكم وتلبية طلباتكم",
-    contact_desc: "تواصل معنا مباشرة عبر الهاتف أو الواتساب، أو قم بزيارة فرعنا في الخريطيات بقطر.",
-    info_title: "معلومات الاتصال",
-    info_phone_lbl: "الهاتف والواتساب",
-    info_loc_lbl: "العنوان",
-    info_loc_val: "الخريطيات - الشارع التجاري - مقابل البنك التجاري - بناية رقم ٤٥ مكتب رقم ١",
-    info_map_link: "عرض على الخريطة",
-    info_hours_lbl: "أوقات العمل",
-    info_hours_val1: "السبت - الخميس: 9:00 صباحاً - 10:00 مساءً",
-    info_hours_val2: "الجمعة: 3:00 ظهراً - 10:00 مساءً",
-    info_socials_lbl: "تابعنا على",
-    form_title: "أرسل لنا رسالة",
-    form_desc: "سنتواصل معك في أقرب وقت ممكن للإجابة على جميع استفساراتك.",
-    form_name_lbl: "الاسم بالكامل",
-    form_name_placeholder: "أدخل اسمك الكريم",
-    form_phone_lbl: "رقم الجوال",
-    form_phone_placeholder: "مثال: 77403038",
-    form_msg_lbl: "تفاصيل استفسارك أو مناسبتك",
-    form_msg_placeholder: "اكتب لنا تفاصيل طلبك أو تجهيز الحفلة المطلوب...",
-    form_submit: "إرسال عبر واتساب",
-    footer_brand_desc: "نحن نؤمن أن الهدية ليست مجرد غرض، بل هي مشاعر تُنقل. نسعى لصناعة أجمل الذكريات من خلال باقاتنا الراقية وتصاميمنا الحصرية.",
-    footer_links_heading: "روابط سريعة",
-    footer_categories_heading: "تصنيفات الهدايا",
-    footer_contact_heading: "تواصل معنا بقطر",
-    footer_copy: "شركة هديتي للورود والهدايا. جميع الحقوق محفوظة.",
-    footer_terms: "الشروط والأحكام",
-    footer_privacy: "سياسة الخصوصية",
-    modal_order_wa: "اطلب الآن عبر واتساب",
-    quick_view_btn: "تفاصيل سريعة",
-    error_fill_fields: "يرجى تعبئة جميع الحقول المطلوبة قبل الإرسال.",
-    whatsapp_order_prefix: "مرحباً هديتي، أود الاستفسار عن باقة/تنسيق من قسم: ",
-    whatsapp_contact_prefix: "مرحباً هديتي، أنا المهتم بـ: "
-  },
-  en: {
-    nav_home: "Home",
-    nav_about: "About Us",
-    nav_products: "Categories",
-    nav_contact: "Contact",
-    cta_order: "Order Now",
-    hero_tag: "Welcome to Hdyati",
-    hero_title: "A gift is not just an item, it's a feeling conveyed",
-    hero_desc: "Luxury newborn arrangements and giveaways, enchanting graduation bouquets, innovative birthday gifts, alongside arranging your special events with the finest chocolates and cakes.",
-    hero_btn_explore: "Explore Bouquets",
-    hero_btn_contact: "Contact Us",
-    about_tag: "Our Story",
-    about_title: "We craft beautiful moments and lasting memories",
-    about_p1: "Since our establishment in 2021, we have stood out in Qatari florist industry by crafting the most beautiful moments. From premium baby gift arrangements to magnificent graduation flower sashes, creative birthday presents, and planning bespoke events with luxury sweets.",
-    about_p2: "All of this is presented by a team of the most skilled professional flower designers, ensuring artistic touches, premium value, and fast delivery covering all regions of Qatar.",
-    badge_since: "Since 2021",
-    features_tag: "Our Values",
-    features_title: "Why Choose Us?",
-    features_desc: "We strive to deliver the absolute best to ensure your sentiments are conveyed with elegance and precision.",
-    feat1_title: "Expert Floral Artists",
-    feat1_desc: "A team of elite, creative florists dedicated to handcrafting bespoke designs tailored to your event.",
-    feat2_title: "Fast Qatar Delivery",
-    feat2_desc: "Reliable, express delivery service across all municipalities in Qatar, bringing flowers fresh and on time.",
-    feat3_title: "Best Value & Price",
-    feat3_desc: "Enjoy the perfect match between exceptional high-end florist design and competitive pricing scales.",
-    categories_tag: "Our Portfolio",
-    categories_title: "Browse Our Elegant Categories",
-    categories_desc: "Select a category below to explore the customized arrangements we designed with absolute care.",
-    cat_all: "All",
-    cat_grad: "Graduation",
-    cat_promo: "Promotion",
-    cat_wedding: "Weddings",
-    cat_birthday: "Birthdays",
-    cat_hajj: "Hajj & Umrah",
-    cat_gifts: "Gifts & Events",
-    contact_tag: "Contact Us",
-    contact_title: "We are Delighted to Serve You",
-    contact_desc: "Reach out to us directly via phone or WhatsApp, or visit our retail branch in Al Kharaitiyat, Qatar.",
-    info_title: "Contact Info",
-    info_phone_lbl: "Phone & WhatsApp",
-    info_loc_lbl: "Location Address",
-    info_loc_val: "Al Kharaitiyat - Commercial Street - Opp. Commercial Bank - Bldg 45, Office 1",
-    info_map_link: "View on Google Maps",
-    info_hours_lbl: "Opening Hours",
-    info_hours_val1: "Sat - Thu: 9:00 AM - 10:00 PM",
-    info_hours_val2: "Friday: 3:00 PM - 10:00 PM",
-    info_socials_lbl: "Follow Us On",
-    form_title: "Send Us a Message",
-    form_desc: "We will reach out to you shortly to answer any inquiries about your orders.",
-    form_name_lbl: "Full Name",
-    form_name_placeholder: "Enter your full name",
-    form_phone_lbl: "Phone Number",
-    form_phone_placeholder: "Example: 77403038",
-    form_msg_lbl: "Inquiry or Event Details",
-    form_msg_placeholder: "Write down your bouquet details or event organization requests...",
-    form_submit: "Send via WhatsApp",
-    footer_brand_desc: "We believe that a gift is not merely a physical object, but rather a package of emotions delivered. We strive to craft the best memories with our exquisite floral and premium setups.",
-    footer_links_heading: "Quick Links",
-    footer_categories_heading: "Gift Categories",
-    footer_contact_heading: "Contact In Qatar",
-    footer_copy: "Hdyati Flowers & Gifts Co. All Rights Reserved.",
-    footer_terms: "Terms & Conditions",
-    footer_privacy: "Privacy Policy",
-    modal_order_wa: "Order via WhatsApp",
-    quick_view_btn: "Quick View",
-    error_fill_fields: "Please fill out all the required fields before submitting.",
-    whatsapp_order_prefix: "Hello Hdyati, I would like to inquire about this bouquet/arrangement from category: ",
-    whatsapp_contact_prefix: "Hello Hdyati, I am interested in: "
-  }
-};
-
-// --- Product Data Catalog ---
-const products = [
+// --- PRODUCT DATABASE (39 Real Products Extracted from Store) ---
+const PRODUCTS = [
   // تخرج (Graduation)
   {
     id: "grad_1",
     category: "تخرج",
-    img: "photo/تخرج/1.jpeg",
-    titleAr: "باقة التخرج الكلاسيكية الفخمة",
-    titleEn: "Luxury Classic Graduation Bouquet",
-    descAr: "تنسيق كلاسيكي أنيق مصمم خصيصاً لمناسبات التخرج والنجاح السعيد.",
-    descEn: "Elegant classic floral arrangement customized for graduation and success milestones."
+    image: "photo/تخرج/1.jpeg",
+    title: { ar: "باقة التخرج الكلاسيكية الفخمة", en: "Luxury Classic Graduation Bouquet" },
+    desc: { ar: "تنسيق كلاسيكي أنيق مصمم خصيصاً لمناسبات التخرج والنجاح السعيد.", en: "Elegant classic floral arrangement customized for graduation and success milestones." },
+    popular: true
   },
   {
     id: "grad_2",
     category: "تخرج",
-    img: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.18 AM.jpeg",
-    titleAr: "طوق تخرج ملكي بالورد الطبيعي المنعش",
-    titleEn: "Royal Graduation Floral Collar",
-    descAr: "طوق تخرج مميز بالورود والرياحين العطرة يطوق النجاح بجمال الطبيعة.",
-    descEn: "Premium floral collar handcrafted with fresh fragrant blooms to honor graduation success."
+    image: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.18 AM.jpeg",
+    title: { ar: "طوق تخرج ملكي بالورد الطبيعي المنعش", en: "Royal Graduation Floral Collar" },
+    desc: { ar: "طوق تخرج مميز بالورود والرياحين العطرة يطوق النجاح بجمال الطبيعة.", en: "Premium floral collar handcrafted with fresh fragrant blooms to honor graduation success." },
+    popular: true
   },
   {
     id: "grad_3",
     category: "تخرج",
-    img: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.21 AM.jpeg",
-    titleAr: "بوكيه التخرج الفاخر بألوان متناسقة",
-    titleEn: "Premium Graduation Bouquet",
-    descAr: "مزيج متناسق من الجوري الفخم لتهنئة من تحب بتخرجهم الفريد.",
-    descEn: "A magnificent blend of royal roses to congratulate your loved ones on their graduation."
+    image: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.21 AM.jpeg",
+    title: { ar: "بوكيه التخرج الفاخر بألوان متناسقة", en: "Premium Graduation Bouquet" },
+    desc: { ar: "مزيج متناسق من الجوري الفخم لتهنئة من تحب بتخرجهم الفريد.", en: "A magnificent blend of royal roses to congratulate your loved ones on their graduation." },
+    popular: true
   },
   {
     id: "grad_4",
     category: "تخرج",
-    img: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.22 AM (2).jpeg",
-    titleAr: "تنسيق تخرج أنيق بالورود البيضاء والذهبية",
-    titleEn: "Elegant White Graduation Arrangement",
-    descAr: "تنسيق راقي يجمع بين نقاء اللون الأبيض وبريق التخرج المبهج.",
-    descEn: "A refined arrangement combining pure white florals with celebratory golden accents."
+    image: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.22 AM (2).jpeg",
+    title: { ar: "تنسيق تخرج أنيق بالورود البيضاء والذهبية", en: "Elegant White Graduation Arrangement" },
+    desc: { ar: "تنسيق راقي يجمع بين نقاء اللون الأبيض وبريق التخرج المبهج.", en: "A refined arrangement combining pure white florals with celebratory golden accents." },
+    popular: false
   },
   {
     id: "grad_5",
     category: "تخرج",
-    img: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.23 AM.jpeg",
-    titleAr: "باقة تخرج متكاملة مع وشاح التخرج الحريري",
-    titleEn: "Complete Graduation Bouquet with Sash",
-    descAr: "باقة حالمة تجمع بين جمال الورد وأناقة وشاح التخرج الحريري المطبوع.",
-    descEn: "A dreamy bouquet featuring beautiful flowers paired with an elegant silk graduation sash."
+    image: "photo/تخرج/WhatsApp Image 2026-06-09 at 8.59.23 AM.jpeg",
+    title: { ar: "باقة تخرج متكاملة مع وشاح التخرج الحريري", en: "Complete Graduation Bouquet with Sash" },
+    desc: { ar: "باقة حالمة تجمع بين جمال الورد وأناقة وشاح التخرج الحريري المطبوع.", en: "A dreamy bouquet featuring beautiful flowers paired with an elegant silk graduation sash." },
+    popular: false
   },
 
   // ترقية (Promotion)
   {
     id: "promo_1",
     category: "ترقية",
-    img: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.25 AM (2).jpeg",
-    titleAr: "تنسيق ترقية رسمي فاخر للمكاتب",
-    titleEn: "Official Luxury Promotion Setup",
-    descAr: "تنسيق وقور بالورود الكلاسيكية الفخمة لتقديم التهاني بمناسبة الترقية الجديدة.",
-    descEn: "A majestic arrangement of classic flowers perfect for office promotion congratulations."
+    image: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.25 AM (2).jpeg",
+    title: { ar: "تنسيق ترقية رسمي فاخر للمكاتب", en: "Official Luxury Promotion Setup" },
+    desc: { ar: "تنسيق وقور بالورود الكلاسيكية الفخمة لتقديم التهاني بمناسبة الترقية الجديدة.", en: "A majestic arrangement of classic flowers perfect for office promotion congratulations." },
+    popular: true
   },
   {
     id: "promo_2",
     category: "ترقية",
-    img: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.26 AM (1).jpeg",
-    titleAr: "بوكيه تهنئة بالترقية والمناصب الجديدة",
-    titleEn: "Congratulatory Promotion Bouquet",
-    descAr: "زهور موسمية فاخرة تعبر عن أرقى الأمنيات بمستقبل مهني باهر.",
-    descEn: "Seasonal luxury flowers conveying best wishes for a stellar professional future."
+    image: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.26 AM (1).jpeg",
+    title: { ar: "بوكيه تهنئة بالترقية والمناصب الجديدة", en: "Congratulatory Promotion Bouquet" },
+    desc: { ar: "زهور موسمية فاخرة تعبر عن أرقى الأمنيات بمستقبل مهني باهر.", en: "Seasonal luxury flowers conveying best wishes for a stellar professional future." },
+    popular: true
   },
   {
     id: "promo_3",
     category: "ترقية",
-    img: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.26 AM (2).jpeg",
-    titleAr: "تنسيق زهور مكتبية فاخرة مع حامل راقي",
-    titleEn: "Luxurious Desk Floral Arrangement",
-    descAr: "تنسيق زهور متناسق ومستدام للمكاتب التنفيذية يبعث على التفاؤل والجمال.",
-    descEn: "Corporate-style floral setup on an elegant stand to elevate executive office environments."
+    image: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.26 AM (2).jpeg",
+    title: { ar: "تنسيق زهور مكتبية فاخرة مع حامل راقي", en: "Luxurious Desk Floral Arrangement" },
+    desc: { ar: "تنسيق زهور متناسق ومستدام للمكاتب التنفيذية يبعث على التفاؤل والجمال.", en: "Corporate-style floral setup on an elegant stand to elevate executive office environments." },
+    popular: false
   },
   {
     id: "promo_4",
     category: "ترقية",
-    img: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.28 AM (1).jpeg",
-    titleAr: "قاعدة خشبية ريفية مع ورود الترقية",
-    titleEn: "Rustic Wooden Base Promotion Flowers",
-    descAr: "دمج بين فخامة الخشب الطبيعي وجاذبية الورود الملونة لتهنئة راقية.",
-    descEn: "Rustic natural wood elements combined with premium vibrant flowers for unique congratulations."
+    image: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.28 AM (1).jpeg",
+    title: { ar: "قاعدة خشبية ريفية مع ورود الترقية", en: "Rustic Wooden Base Promotion Flowers" },
+    desc: { ar: "دمج بين فخامة الخشب الطبيعي وجاذبية الورود الملونة لتهنئة راقية.", en: "Rustic natural wood elements combined with premium vibrant flowers for unique congratulations." },
+    popular: false
   },
   {
     id: "promo_5",
     category: "ترقية",
-    img: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.28 AM.jpeg",
-    titleAr: "باقة ورد التهنئة الذهبية الفاخرة",
-    titleEn: "Golden Congratulatory Floral Arrangement",
-    descAr: "باقة باهرة باللونين الأصفر والذهبي ترمز للنجاح والتفوق المهني.",
-    descEn: "A beautiful yellow and gold arrangement symbolizing professional achievement and victory."
+    image: "photo/ترقية/WhatsApp Image 2026-06-09 at 8.59.28 AM.jpeg",
+    title: { ar: "باقة ورد التهنئة الذهبية الفاخرة", en: "Golden Congratulatory Floral Arrangement" },
+    desc: { ar: "باقة باهرة باللونين الأصفر والذهبي ترمز للنجاح والتفوق المهني.", en: "A beautiful yellow and gold arrangement symbolizing professional achievement and victory." },
+    popular: true
   },
 
   // حج وعمرة (Hajj)
   {
     id: "hajj_1",
     category: "حج",
-    img: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.20 AM.jpeg",
-    titleAr: "تنسيق استقبال الحجاج الفاخر بالبياض والنقاء",
-    titleEn: "Luxury Hajj Welcome Setup",
-    descAr: "تنسيق استقبال روحاني رائع بالورود البيضاء والعبارات الترحيبية المميزة.",
-    descEn: "A magnificent spiritual welcoming setup with pure white flowers and Hajj greeting cards."
+    image: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.20 AM.jpeg",
+    title: { ar: "تنسيق استقبال الحجاج الفاخر بالبياض والنقاء", en: "Luxury Hajj Welcome Setup" },
+    desc: { ar: "تنسيق استقبال روحاني رائع بالورود البيضاء والعبارات الترحيبية المميزة.", en: "A magnificent spiritual welcoming setup with pure white flowers and Hajj greeting cards." },
+    popular: true
   },
   {
     id: "hajj_2",
     category: "حج",
-    img: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.29 AM (2).jpeg",
-    titleAr: "باقة عودة الحج المبارك والتهاني الطيبة",
-    titleEn: "Blessed Hajj Return Bouquet",
-    descAr: "باقة فخمة ترحب بعودة ضيوف الرحمن لتقديم التهاني بحج مبرور وسعي مشكور.",
-    descEn: "Congratulate pilgrims returning from their sacred journey with this blessed floral display."
+    image: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.29 AM (2).jpeg",
+    title: { ar: "باقة عودة الحج المبارك والتهاني الطيبة", en: "Blessed Hajj Return Bouquet" },
+    desc: { ar: "باقة فخمة ترحب بعودة ضيوف الرحمن لتقديم التهاني بحج مبرور وسعي مشكور.", en: "Congratulate pilgrims returning from their sacred journey with this blessed floral display." },
+    popular: true
   },
   {
     id: "hajj_3",
     category: "حج",
-    img: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.31 AM (1).jpeg",
-    titleAr: "هدية الحج الروحانية بالورود وأبخرة العود",
-    titleEn: "Spiritual Hajj Gift with Flowers",
-    descAr: "صندوق هدايا فريد يجمع بين الورود البيضاء العطرة والعود الفاخر للمباركة بالحج.",
-    descEn: "A unique gift box combining fragrant white roses and incense for returning Hajj pilgrims."
+    image: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.31 AM (1).jpeg",
+    title: { ar: "هدية الحج الروحانية بالورود وأبخرة العود", en: "Spiritual Hajj Gift with Flowers" },
+    desc: { ar: "صندوق هدايا فريد يجمع بين الورود البيضاء العطرة والعود الفاخر للمباركة بالحج.", en: "A unique gift box combining fragrant white roses and incense for returning Hajj pilgrims." },
+    popular: false
   },
   {
     id: "hajj_4",
     category: "حج",
-    img: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.32 AM (1).jpeg",
-    titleAr: "تنسيق تهنئة العمرة الفاخر والتصميم العصري",
-    titleEn: "Premium Umrah Congratulation Design",
-    descAr: "تنسيق ناعم من الروز الأبيض والأغصان الخضراء للتهنئة بالعمرة المقبولة.",
-    descEn: "A delicate design of white roses and lush greenery congratulating an accepted Umrah."
+    image: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.32 AM (1).jpeg",
+    title: { ar: "تنسيق تهنئة العمرة الفاخر والتصميم العصري", en: "Premium Umrah Congratulation Design" },
+    desc: { ar: "تنسيق ناعم من الروز الأبيض والأغصان الخضراء للتهنئة بالعمرة المقبولة.", en: "A delicate design of white roses and lush greenery congratulating an accepted Umrah." },
+    popular: false
   },
   {
     id: "hajj_5",
     category: "حج",
-    img: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.32 AM.jpeg",
-    titleAr: "باقة الكعبة المشرفة التذكارية الفريدة",
-    titleEn: "Kaaba Memorial Flower Arrangement",
-    descAr: "تصميم خاص باللونين الأسود والذهبي تعبيراً عن حب مكة المكرمة الكعبة المشرفة.",
-    descEn: "A custom floral piece themed in black and gold inspired by the Holy Kaaba."
+    image: "photo/حج/WhatsApp Image 2026-06-09 at 8.59.32 AM.jpeg",
+    title: { ar: "باقة الكعبة المشرفة التذكارية الفريدة", en: "Kaaba Memorial Flower Arrangement" },
+    desc: { ar: "تصميم خاص باللونين الأسود والذهبي تعبيراً عن حب مكة المكرمة الكعبة المشرفة.", en: "A custom floral piece themed in black and gold inspired by the Holy Kaaba." },
+    popular: true
   },
 
   // زواج (Wedding)
   {
     id: "wed_1",
     category: "زواج",
-    img: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.20 AM (3).jpeg",
-    titleAr: "مسكة عروس كلاسيكية فاخرة بالبيوني والجوري",
-    titleEn: "Classic Luxury Bridal Bouquet",
-    descAr: "تنسيق يدوي فائق الجودة يضفي جمالاً استثنائياً على العروس في ليلة العمر.",
-    descEn: "Exquisite hand-tied bridal bouquet adding exceptional elegance to the bride's big day."
+    image: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.20 AM (3).jpeg",
+    title: { ar: "مسكة عروس كلاسيكية فاخرة بالبيوني والجوري", en: "Classic Luxury Bridal Bouquet" },
+    desc: { ar: "تنسيق يدوي فائق الجودة يضفي جمالاً استثنائياً على العروس في ليلة العمر.", en: "Exquisite hand-tied bridal bouquet adding exceptional elegance to the bride's big day." },
+    popular: true
   },
   {
     id: "wed_2",
     category: "زواج",
-    img: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.21 AM (2).jpeg",
-    titleAr: "تنسيق طاولة زفاف ملكي بالزهور المتدلية",
-    titleEn: "Royal Wedding Table Centerpiece",
-    descAr: "تنسيقات زهور فاخرة للصالات وطاولات الحفلات تزيد الزفاف بهاءً ورونقاً.",
-    descEn: "Opulent table floral arrangements adding premium scale and design to wedding halls."
+    image: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.21 AM (2).jpeg",
+    title: { ar: "تنسيق طاولة زفاف ملكي بالزهور المتدلية", en: "Royal Wedding Table Centerpiece" },
+    desc: { ar: "تنسيقات زهور فاخرة للصالات وطاولات الحفلات تزيد الزفاف بهاءً ورونقاً.", en: "Opulent table floral arrangements adding premium scale and design to wedding halls." },
+    popular: true
   },
   {
     id: "wed_3",
     category: "زواج",
-    img: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.29 AM (1).jpeg",
-    titleAr: "باقة خطوبة رومانسية بالورود الوردية الناعمة",
-    titleEn: "Engagement Bouquet with Pink Roses",
-    descAr: "مزيج ساحر من درجات الوردي لتوثيق لحظات الخطوبة الرومانسية الدافئة.",
-    descEn: "A charming blend of pink shades designed to celebrate romantic engagement moments."
+    image: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.29 AM (1).jpeg",
+    title: { ar: "باقة خطوبة رومانسية بالورود الوردية الناعمة", en: "Engagement Bouquet with Pink Roses" },
+    desc: { ar: "مزيج ساحر من درجات الوردي لتوثيق لحظات الخطوبة الرومانسية الدافئة.", en: "A charming blend of pink shades designed to celebrate romantic engagement moments." },
+    popular: false
   },
   {
     id: "wed_4",
     category: "زواج",
-    img: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.31 AM (2).jpeg",
-    titleAr: "طوق زهور زفاف فاخر لتزيين الممرات والسيارات",
-    titleEn: "Luxury Wedding Floral Crown & Decor",
-    descAr: "أكاليل زهور وتنسيقات حصرية لتزيين سيارات الزفاف وممرات استقبال الضيوف.",
-    descEn: "Luxury floral wreaths and garlands crafted to decorate wedding cars and guest pathways."
+    image: "photo/زواج/WhatsApp Image 2026-06-09 at 8.59.31 AM (2).jpeg",
+    title: { ar: "طوق زهور زفاف فاخر لتزيين الممرات والسيارات", en: "Luxury Wedding Floral Crown & Decor" },
+    desc: { ar: "أكاليل زهور وتنسيقات حصرية لتزيين سيارات الزفاف وممرات استقبال الضيوف.", en: "Luxury floral wreaths and garlands crafted to decorate wedding cars and guest pathways." },
+    popular: false
   },
 
   // أعياد ميلاد (Birthday)
   {
     id: "bday_1",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.19 AM.jpeg",
-    titleAr: "صندوق ورد عيد الميلاد مع بالون التهنئة المخصص",
-    titleEn: "Birthday Box with Flowers & Balloon",
-    descAr: "صندوق جلدي فاخر يدمج رقة الورد وجاذبية البالون الطائر المطبوع بالاسم.",
-    descEn: "A luxury leather box combining delicate flowers and a customized floating helium balloon."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.19 AM.jpeg",
+    title: { ar: "صندوق ورد عيد الميلاد مع بالون التهنئة المخصص", en: "Birthday Box with Flowers & Balloon" },
+    desc: { ar: "صندوق جلدي فاخر يدمج رقة الورد وجاذبية البالون الطائر المطبوع بالاسم.", en: "A luxury leather box combining delicate flowers and a customized floating helium balloon." },
+    popular: true
   },
   {
     id: "bday_2",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.22 AM.jpeg",
-    titleAr: "باقة ألوان الحياة المبهجة لأعياد الميلاد",
-    titleEn: "Joyful Colors of Life Bouquet",
-    descAr: "مجموعة زهور ملونة ونابضة بالحياة تشيع البهجة والاحتفال بميلاد من تحب.",
-    descEn: "Vibrant and colorful floral collection radiating joy for a loved one's birthday."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.22 AM.jpeg",
+    title: { ar: "باقة ألوان الحياة المبهجة لأعياد الميلاد", en: "Joyful Colors of Life Bouquet" },
+    desc: { ar: "مجموعة زهور ملونة ونابضة بالحياة تشيع البهجة والاحتفال بميلاد من تحب.", en: "Vibrant and colorful floral collection radiating joy for a loved one's birthday." },
+    popular: true
   },
   {
     id: "bday_3",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.24 AM (2).jpeg",
-    titleAr: "سلة زهور أعياد الميلاد الفاخرة بتنسيق عصري",
-    titleEn: "Luxury Birthday Flower Basket",
-    descAr: "سلة من القش الطبيعي منسقة بورود الجوري والأنثوريوم لتهنئة مميزة.",
-    descEn: "Natural wicker basket styled with roses and anthuriums for a beautiful birthday gift."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.24 AM (2).jpeg",
+    title: { ar: "سلة زهور أعياد الميلاد الفاخرة بتنسيق عصري", en: "Luxury Birthday Flower Basket" },
+    desc: { ar: "سلة من القش الطبيعي منسقة بورود الجوري والأنثوريوم لتهنئة مميز.", en: "Natural wicker basket styled with roses and anthuriums for a beautiful birthday gift." },
+    popular: false
   },
   {
     id: "bday_4",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.24 AM.jpeg",
-    titleAr: "تنسيق عيد ميلاد ملكي بالورد الأحمر الكلاسيكي",
-    titleEn: "Red Roses Birthday Arrangement",
-    descAr: "عبر عن أسمى مشاعرك بالورد الأحمر الراقية المنسقة في فازة زجاجية.",
-    descEn: "Convey your deepest emotions with classic red roses arranged in an elegant glass vase."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.24 AM.jpeg",
+    title: { ar: "تنسيق عيد ميلاد ملكي بالورد الأحمر الكلاسيكي", en: "Red Roses Birthday Arrangement" },
+    desc: { ar: "عبر عن أسمى مشاعرك بالورد الأحمر الراقية المنسقة في فازة زجاجية.", en: "Convey your deepest emotions with classic red roses arranged in an elegant glass vase." },
+    popular: false
   },
   {
     id: "bday_5",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.25 AM.jpeg",
-    titleAr: "باقة الشوكولاتة الفاخرة والزهور المختلطة",
-    titleEn: "Chocolate & Mixed Flowers Bouquet",
-    descAr: "الهدية المثالية التي تجمع بين جمال الورد الطبيعي ولذة الشوكولاتة الفخمة.",
-    descEn: "The perfect birthday gift combining gorgeous fresh flowers and premium chocolates."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.25 AM.jpeg",
+    title: { ar: "باقة الشوكولاتة الفاخرة والزهور المختلطة", en: "Chocolate & Mixed Flowers Bouquet" },
+    desc: { ar: "الهدية المثالية التي تجمع بين جمال الورد الطبيعي ولذة الشوكولاتة الفخمة.", en: "The perfect birthday gift combining gorgeous fresh flowers and premium chocolates." },
+    popular: true
   },
   {
     id: "bday_6",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.27 AM (1).jpeg",
-    titleAr: "تنسيق عيد ميلاد بناتي وردي ناعم ورقيق",
-    titleEn: "Feminine Pink Birthday Arrangement",
-    descAr: "تنسيق مبهج بألوان الباستيل الوردية يعبر عن الرقة والدلال لرفيقة دربك.",
-    descEn: "A cheerful pastel pink design conveying tenderness and joy for her birthday."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.27 AM (1).jpeg",
+    title: { ar: "تنسيق عيد ميلاد بناتي وردي ناعم ورقيق", en: "Feminine Pink Birthday Arrangement" },
+    desc: { ar: "تنسيق مبهج بألوان الباستيل الوردية يعبر عن الرقة والدلال لرفيقة دربك.", en: "A cheerful pastel pink design conveying tenderness and joy for her birthday." },
+    popular: false
   },
   {
     id: "bday_7",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.27 AM.jpeg",
-    titleAr: "صندوق هدايا عيد ميلاد متكامل بالزهور والعطور",
-    titleEn: "All-in-One Birthday Gift Box",
-    descAr: "علبة فاخرة مصممة بعناية تضم باقة زهور وشوكولاتة أو عطر حسب اختياركم.",
-    descEn: "Bespoke gift box containing fresh flowers paired with chocolates or perfume."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.27 AM.jpeg",
+    title: { ar: "صندوق هدايا عيد ميلاد متكامل بالزهور والعطور", en: "All-in-One Birthday Gift Box" },
+    desc: { ar: "علبة فاخرة مصممة بعناية تضم باقة زهور وشوكولاتة أو عطر حسب اختياركم.", en: "Bespoke gift box containing fresh flowers paired with chocolates or perfume." },
+    popular: false
   },
   {
     id: "bday_8",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.30 AM (1).jpeg",
-    titleAr: "بوكيه عيد ميلاد ملكي بلمسات الذهب الفاتن",
-    titleEn: "Royal Golden Birthday Bouquet",
-    descAr: "أوراق ذهبية منسقة مع الجوري الداكن يعطي طابع الملوك والأناقة الفائقة.",
-    descEn: "Golden foliage combined with dark velvet roses for a royal birthday masterpiece."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.30 AM (1).jpeg",
+    title: { ar: "بوكيه عيد ميلاد ملكي بلمسات الذهب الفاتن", en: "Royal Golden Birthday Bouquet" },
+    desc: { ar: "أوراق ذهبية منسقة مع الجوري الداكن يعطي طابع الملوك والأناقة الفائقة.", en: "Golden foliage combined with dark velvet roses for a royal birthday masterpiece." },
+    popular: true
   },
   {
     id: "bday_9",
     category: "ميلاد",
-    img: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.31 AM.jpeg",
-    titleAr: "سلة ورود الربيع للأعياد واللحظات السعيدة",
-    titleEn: "Spring Flowers Birthday Basket",
-    descAr: "ورود متفتحة تشيع عبق الربيع والألوان النضرة لتزين يوم الميلاد.",
-    descEn: "Freshly blossomed spring flowers in a beautiful arrangement celebrating new beginnings."
+    image: "photo/ميلاد/WhatsApp Image 2026-06-09 at 8.59.31 AM.jpeg",
+    title: { ar: "سلة ورود الربيع للأعياد واللحظات السعيدة", en: "Spring Flowers Birthday Basket" },
+    desc: { ar: "ورود متفتحة تشيع عبق الربيع والألوان النضرة لتزين يوم الميلاد.", en: "Freshly blossomed spring flowers in a beautiful arrangement celebrating new beginnings." },
+    popular: false
   },
 
   // هدايا ومناسبات (Gift)
   {
     id: "gift_1",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.20 AM (1).jpeg",
-    titleAr: "تنسيق هدايا استقبال مواليد فاخر بقطر",
-    titleEn: "Premium Newborn Gift Setup",
-    descAr: "تصميم أنيق يتناسب مع فرحة قدوم المولود الجديد، مع توزيعات وبطاقة ترحيب.",
-    descEn: "An elegant setup to celebrate the arrival of the newborn, complete with cards and favors."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.20 AM (1).jpeg",
+    title: { ar: "تنسيق هدايا استقبال مواليد فاخر بقطر", en: "Premium Newborn Gift Setup" },
+    desc: { ar: "تصميم أنيق يتناسب مع فرحة قدوم المولود الجديد، مع توزيعات وبطاقة ترحيب.", en: "An elegant setup to celebrate the arrival of the newborn, complete with cards and favors." },
+    popular: true
   },
   {
     id: "gift_2",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.20 AM (2).jpeg",
-    titleAr: "هدية شيكولاتة فاخرة، كيك وتنسيق ورد متكامل",
-    titleEn: "Chocolate, Cake & Floral Gift Combo",
-    descAr: "أقوى توليفة للمناسبات تجمع بين الكيك الفخم والشوكولاتة والزهور الرائعة.",
-    descEn: "The ultimate celebration package combining rich cake, luxury chocolates, and fresh flowers."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.20 AM (2).jpeg",
+    title: { ar: "هدية شيكولاتة فاخرة، كيك وتنسيق ورد متكامل", en: "Chocolate, Cake & Floral Gift Combo" },
+    desc: { ar: "أقوى توليفة للمناسبات تجمع بين الكيك الفخم والشوكولاتة والزهور الرائعة.", en: "The ultimate celebration package combining rich cake, luxury chocolates, and fresh flowers." },
+    popular: true
   },
   {
     id: "gift_3",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.22 AM (1).jpeg",
-    titleAr: "توزيعات مناسبات فاخرة وتصاميم مخصصة",
-    titleEn: "Luxurious Occasion Giveaways",
-    descAr: "توزيعات صغيرة وباقات منسقة بحرفية لتوزيعها على ضيوف حفلاتكم وتجهيزاتكم.",
-    descEn: "Chic mini floral arrangements and customized favors for your event guests."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.22 AM (1).jpeg",
+    title: { ar: "توزيعات مناسبات فاخرة وتصاميم مخصصة", en: "Luxurious Occasion Giveaways" },
+    desc: { ar: "توزيعات صغيرة وباقات منسقة بحرفية لتوزيعها على ضيوف حفلاتكم وتجهيزاتكم.", en: "Chic mini floral arrangements and customized favors for your event guests." },
+    popular: false
   },
   {
     id: "gift_4",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.23 AM (1).jpeg",
-    titleAr: "هدية تذكارية مخصصة بالورود والبراويز الفنية",
-    titleEn: "Customized Memorial Gift with Flowers",
-    descAr: "تنسيق فريد يدمج بين إطار الصورة التذكارية وتنسيق ورد طبيعي يعيش طويلاً.",
-    descEn: "A unique floral design featuring a photo frame embedded with long-lasting roses."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.23 AM (1).jpeg",
+    title: { ar: "هدية تذكارية مخصصة بالورود والبراويز الفنية", en: "Customized Memorial Gift with Flowers" },
+    desc: { ar: "تنسيق فريد يدمج بين إطار الصورة التذكارية وتنسيق ورد طبيعي يعيش طويلاً.", en: "A unique floral design featuring a photo frame embedded with long-lasting roses." },
+    popular: false
   },
   {
     id: "gift_5",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.23 AM (2).jpeg",
-    titleAr: "صندوق الهدايا الخشبي الفخم بتنسيق الورد الطبيعي",
-    titleEn: "Luxury Wooden Gift Box Setup",
-    descAr: "علبة خشبية عتيقة فخمة مليئة بالورود والحلويات الراقية للتعبير عن التقدير.",
-    descEn: "Vintage wooden box loaded with beautiful flowers and sweets expressing true appreciation."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.23 AM (2).jpeg",
+    title: { ar: "صندوق الهدايا الخشبي الفخم بتنسيق الورد الطبيعي", en: "Luxury Wooden Gift Box Setup" },
+    desc: { ar: "علبة خشبية عتيقة فخمة مليئة بالورود والحلويات الراقية للتعبير عن التقدير.", en: "Vintage wooden box loaded with beautiful flowers and sweets expressing true appreciation." },
+    popular: true
   },
   {
     id: "gift_6",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.24 AM (1).jpeg",
-    titleAr: "باقة زهور المناسبات الكبرى وحفلات الاستقبال",
-    titleEn: "Grand Occasion Floral Bouquet",
-    descAr: "باقة عملاقة من الزهور المنوعة والمستوردة خصيصاً للمناسبات الراقية بقطر.",
-    descEn: "Giant luxury bouquet handcrafted with imported florals for major Qatari events."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.24 AM (1).jpeg",
+    title: { ar: "باقة زهور المناسبات الكبرى وحفلات الاستقبال", en: "Grand Occasion Floral Bouquet" },
+    desc: { ar: "باقة عملاقة من الزهور المنوعة والمستوردة خصيصاً للمناسبات الراقية بقطر.", en: "Giant luxury bouquet handcrafted with imported florals for major Qatari events." },
+    popular: false
   },
   {
     id: "gift_7",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.25 AM (1).jpeg",
-    titleAr: "تنسيق هدايا العيد والتهاني الاجتماعية المميزة",
-    titleEn: "Holiday & Congratulations Gift Setup",
-    descAr: "تنسيق حصري للمعايدات والزيارات العائلية يضفي طابع الفخامة والأصالة.",
-    descEn: "An exclusive design for holidays and family visits bringing warmth and prestige."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.25 AM (1).jpeg",
+    title: { ar: "تنسيق هدايا العيد والتهاني الاجتماعية المميزة", en: "Holiday & Congratulations Gift Setup" },
+    desc: { ar: "تنسيق حصري للمعايدات والزيارات العائلية يضفي طابع الفخامة والأصالة.", en: "An exclusive design for holidays and family visits bringing warmth and prestige." },
+    popular: false
   },
   {
     id: "gift_8",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.26 AM.jpeg",
-    titleAr: "توزيعات مواليد راقية وتجهيز غرف استقبال بقطر",
-    titleEn: "Elegant Newborn Celebration Giveaways",
-    descAr: "نهتم بأدق التفاصيل لتجهيز غرف استقبال المواليد مع أرقى صواني التوزيعات.",
-    descEn: "Premium newborn room setup services including luxury customized favor trays."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.26 AM.jpeg",
+    title: { ar: "توزيعات مواليد راقية وتجهيز غرف استقبال بقطر", en: "Elegant Newborn Celebration Giveaways" },
+    desc: { ar: "نهتم بأدق التفاصيل لتجهيز غرف استقبال المواليد مع أرقى صواني التوزيعات.", en: "Premium newborn room setup services including luxury customized favor trays." },
+    popular: true
   },
   {
     id: "gift_9",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.29 AM.jpeg",
-    titleAr: "تنسيق هدايا فاخرة مع كيك وحلويات الحفلات",
-    titleEn: "Premium Gift Arrangement with Cake",
-    descAr: "بوكس هدايا غني ومبتكر يجمع الكيك اللذيذ وتنسيق ورود الجوري الفاتنة.",
-    descEn: "Rich gift box featuring a delicious cake and beautiful red roses arrangement."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.29 AM.jpeg",
+    title: { ar: "تنسيق هدايا فاخرة مع كيك وحلويات الحفلات", en: "Premium Gift Arrangement with Cake" },
+    desc: { ar: "بوكس هدايا غني ومبتكر يجمع الكيك اللذيذ وتنسيق ورود الجوري الفاتنة.", en: "Rich gift box featuring a delicious cake and beautiful red roses arrangement." },
+    popular: false
   },
   {
     id: "gift_10",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.30 AM (2).jpeg",
-    titleAr: "هدية مولود جديد ملكية باللونين الأزرق والوردي",
-    titleEn: "Royal Newborn Baby Celebration Gift",
-    descAr: "تنسيق هدايا للمواليد الجدد بتصاميم حصرية وفخمة بالورد والملابس الأنيقة.",
-    descEn: "Luxury newborn gifts with customized floral and premium baby clothing styling."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.30 AM (2).jpeg",
+    title: { ar: "هدية مولود جديد ملكية باللونين الأزرق والوردي", en: "Royal Newborn Baby Celebration Gift" },
+    desc: { ar: "تنسيق هدايا للمواليد الجدد بتصاميم حصرية وفخمة بالورد والملابس الأنيقة.", en: "Luxury newborn gifts with customized floral and premium baby clothing styling." },
+    popular: false
   },
   {
     id: "gift_11",
     category: "هدية",
-    img: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.30 AM.jpeg",
-    titleAr: "صينية تقديم شيكولاتة وتنسيق ورد للضيوف",
-    titleEn: "Chocolate Serving Tray & Flowers Combo",
-    descAr: "تنسيق صينية شوكولاتة فاخرة مدمجة مع باقات زهور لتزيين مجالسكم الكريمة.",
-    descEn: "Elegant Qatari style chocolate serving tray integrated with premium floral decors."
+    image: "photo/هدية/WhatsApp Image 2026-06-09 at 8.59.30 AM.jpeg",
+    title: { ar: "صينية تقديم شيكولاتة وتنسيق ورد للضيوف", en: "Chocolate Serving Tray & Flowers Combo" },
+    desc: { ar: "تنسيق صينية شوكولاتة فاخرة مدمجة مع باقات زهور لتزيين مجالسكم الكريمة.", en: "Elegant Qatari style chocolate serving tray integrated with premium floral decors." },
+    popular: true
   }
 ];
 
-// --- Application State ---
-let currentLang = localStorage.getItem("hdyati_lang") || "ar";
-
-// --- DOM Elements Cache ---
-const elements = {
-  header: document.getElementById("header"),
-  langToggle: document.getElementById("lang-toggle"),
-  langText: document.getElementById("lang-text"),
-  menuToggle: document.getElementById("menu-toggle"),
-  navMenu: document.getElementById("nav-menu"),
-  galleryGrid: document.getElementById("gallery-grid"),
-  filterButtons: document.querySelectorAll(".filter-btn"),
-  modal: document.getElementById("quick-view-modal"),
-  modalImg: document.getElementById("modal-img"),
-  modalCat: document.getElementById("modal-cat"),
-  modalTitle: document.getElementById("modal-title"),
-  modalDesc: document.getElementById("modal-desc"),
-  modalClose: document.getElementById("modal-close"),
-  modalOrderBtn: document.getElementById("modal-order-btn"),
-  contactForm: document.getElementById("contact-form"),
-  backToTop: document.getElementById("back-to-top"),
-  yearSpan: document.getElementById("year"),
-  formName: document.getElementById("form-name"),
-  formPhone: document.getElementById("form-phone"),
-  formMessage: document.getElementById("form-message")
+// --- TRANSLATIONS DICTIONARY ---
+const TRANSLATIONS = {
+  ar: {
+    siteTitle: "هديتي | ورود وتجهيز مناسبات قطر — توصيل لجميع المناطق",
+    metaDesc: "هديتي للورود وتجهيز المناسبات في قطر. يوجد توصيل لجميع مناطق قطر. للطلب تواصل معنا عبر واتساب 77403038. الخريطيات - الشارع التجاري - مقابل البنك التجاري.",
+    navHome: "الرئيسية",
+    navGrad: "باقات التخرج",
+    navPromo: "تهنئة ترقية",
+    navWedding: "مناسبات زواج",
+    navBirthday: "أعياد ميلاد",
+    navHajj: "حج وعمرة",
+    navGifts: "هدايا وتنسيقات",
+    btnSearch: "بحث",
+    searchPlaceholder: "ابحث عن باقة ورد، تنسيق، أو هدية...",
+    cartTitle: "طلبك من هديتي",
+    cartEmpty: "سلتك فارغة حالياً — اختر من منتجاتنا الجميلة!",
+    btnAddToCart: "أضف للطلب",
+    btnAddedToCart: "تمت الإضافة ✔",
+    btnCheckout: "أكمل طلبك عبر واتساب",
+    btnContinueShopping: "تصفح المزيد",
+    shipping: "التوصيل لجميع مناطق قطر:",
+    free: "مجاني 🇶🇦",
+    checkoutTitle: "أكمل طلبك — سيتواصل معك فريق هديتي",
+    clientName: "اسمك الكريم",
+    clientPhone: "رقم واتسابك في قطر",
+    clientAddress: "منطقتك في قطر (للتوصيل)",
+    paymentMethod: "طريقة الدفع",
+    payApple: "Apple Pay",
+    payCard: "بطاقة ائتمان / مدى",
+    payCod: "دفع عند الاستلام",
+    btnPayNow: "أرسل طلبي لهديتي",
+    orderSuccessTitle: "تم استلام طلبك بنجاح! 🌸",
+    orderSuccessDesc: "شكراً لثقتك بهديتي 💜 سيتواصل معك فريقنا عبر الواتساب قريباً لتنسيق تفاصيل طلبك وتحديد موعد التوصيل.",
+    orderReceipt: "منتجاتك المختارة",
+    orderNum: "رقم طلبك:",
+    btnBackHome: "تصفح مزيد من تشكيلاتنا",
+    footerDesc: "هديتي للورود وتجهيز المناسبات — نقدم أجمل باقات الورد وتنسيقات الهدايا الراقية مع توصيل سريع لجميع مناطق قطر. اطلب الآن عبر واتساب.",
+    footerContact: "تواصل معنا",
+    footerAddress: "الخريطيات - الشارع التجاري - مقابل البنك التجاري، الدوحة، قطر",
+    footerRights: "جميع الحقوق محفوظة © هديتي 2026 | قطر | @hdyati22",
+    heroTitle: "هديتي للورود وتجهيز المناسبات",
+    heroSub: "يوجد توصيل لجميع مناطق قطر 🇶🇦 — للطلب تواصل معنا عبر واتساب وسيتم الرد عليك فوراً لتنسيق طلبك.",
+    catAll: "الكل",
+    sortBy: "تصفية",
+    sortPopular: "الأكثر طلباً",
+    toastAdded: "تمت إضافة المنتج إلى طلبك!",
+    featuredProducts: "تشكيلاتنا المختارة"
+  },
+  en: {
+    siteTitle: "Hdyati | Flowers & Events in Qatar — Delivery All Areas",
+    metaDesc: "Hdyati (@hdyati22) — Flowers & event arrangements in Qatar. Delivery to all Qatar areas. Order via WhatsApp 77403038. Al-Kharaitiyat, Commercial Street, Doha.",
+    navHome: "Home",
+    navGrad: "Graduation",
+    navPromo: "Promotion",
+    navWedding: "Weddings",
+    navBirthday: "Birthdays",
+    navHajj: "Hajj & Umrah",
+    navGifts: "Gifts & Arrangements",
+    btnSearch: "Search",
+    searchPlaceholder: "Search bouquets, arrangements, gifts...",
+    cartTitle: "Your Order",
+    cartEmpty: "Your cart is empty — browse our beautiful arrangements!",
+    btnAddToCart: "Add to Order",
+    btnAddedToCart: "Added ✔",
+    btnCheckout: "Complete Order via WhatsApp",
+    btnContinueShopping: "Browse More",
+    shipping: "Delivery (All Qatar):",
+    free: "Free 🇶🇦",
+    checkoutTitle: "Complete Your Order — Hdyati Team Will Contact You",
+    clientName: "Your Name",
+    clientPhone: "WhatsApp Number (Qatar)",
+    clientAddress: "Your Area in Qatar (for delivery)",
+    paymentMethod: "Payment Method",
+    payApple: "Apple Pay",
+    payCard: "Credit Card / Debit",
+    payCod: "Cash on Delivery",
+    btnPayNow: "Send Order to Hdyati",
+    orderSuccessTitle: "Order Received! 🌸",
+    orderSuccessDesc: "Thank you for choosing Hdyati 💜 Our team will contact you on WhatsApp shortly to confirm your order and delivery details.",
+    orderReceipt: "Your Selected Items",
+    orderNum: "Order #:",
+    btnBackHome: "Browse More Arrangements",
+    footerDesc: "Hdyati (@hdyati22) — Flowers & event arrangements with delivery to all Qatar areas. Order via WhatsApp.",
+    footerContact: "Contact Us",
+    footerAddress: "Al-Kharaitiyat, Commercial Street, Opposite Commercial Bank, Doha, Qatar",
+    footerRights: "All rights reserved © Hdyati 2026 | Qatar | @hdyati22",
+    heroTitle: "Hdyati — Flowers & Event Arrangements",
+    heroSub: "Delivery to all Qatar areas 🇶🇦 — Order via WhatsApp and we'll contact you right away ⬇️",
+    catAll: "All",
+    sortBy: "Filter",
+    sortPopular: "Most Popular",
+    toastAdded: "Added to your order!",
+    featuredProducts: "Our Arrangements"
+  }
 };
 
-// --- Initialization ---
-document.addEventListener("DOMContentLoaded", () => {
-  setLanguage(currentLang);
-  setupEventListeners();
-  renderGallery("all");
-  updateYear();
-});
+// --- APP STATE ---
+let state = {
+  lang: "ar",
+  theme: "light",
+  category: "all",
+  searchQuery: "",
+  sortBy: "popular",
+  cart: [],
+  wishlist: []
+};
 
-// --- Update Current Copyright Year ---
-function updateYear() {
-  if (elements.yearSpan) {
-    elements.yearSpan.textContent = new Date().getFullYear();
-  }
+// --- DOM ELEMENTS ---
+const elements = {
+  html: document.documentElement,
+  body: document.body,
+  langBtn: document.getElementById("lang-btn"),
+  themeBtn: document.getElementById("theme-btn"),
+  
+  // Navigation & Search
+  navHome: document.getElementById("nav-home"),
+  navGrad: document.getElementById("nav-grad"),
+  navPromo: document.getElementById("nav-promo"),
+  navWedding: document.getElementById("nav-wedding"),
+  navBirthday: document.getElementById("nav-birthday"),
+  navHajj: document.getElementById("nav-hajj"),
+  navGifts: document.getElementById("nav-gifts"),
+  searchBar: document.getElementById("search-bar"),
+  searchBtn: document.getElementById("search-btn"),
+  
+  // Hero
+  heroTitle: document.getElementById("hero-title"),
+  heroSub: document.getElementById("hero-sub"),
+  heroCta: document.getElementById("hero-cta"),
+  
+  // Categories Horizontal Links
+  catScroll: document.getElementById("category-scroll"),
+  
+  // Catalog Controls & Products
+  featuredTitle: document.getElementById("featured-title"),
+  sortLabel: document.getElementById("sort-label"),
+  sortSelect: document.getElementById("sort-select"),
+  productsGrid: document.getElementById("products-grid"),
+  
+  // Cart Drawer
+  cartToggleBtn: document.getElementById("cart-toggle-btn"),
+  cartCountBadge: document.getElementById("cart-count-badge"),
+  cartDrawer: document.getElementById("cart-drawer"),
+  cartOverlay: document.getElementById("cart-overlay"),
+  cartCloseBtn: document.getElementById("cart-close-btn"),
+  cartDrawerTitle: document.getElementById("cart-drawer-title"),
+  cartItemsContainer: document.getElementById("cart-items"),
+  cartSummaryContainer: document.getElementById("cart-summary"),
+  cartCheckoutBtn: document.getElementById("cart-checkout-btn"),
+  
+  // Footer
+  footerDesc: document.getElementById("footer-desc"),
+  footerContactH: document.getElementById("footer-contact-h"),
+  footerAddressText: document.getElementById("footer-address-text"),
+  footerRightsText: document.getElementById("footer-rights-text"),
+  
+  // Checkout Modal
+  checkoutModal: document.getElementById("checkout-modal"),
+  checkoutClose: document.getElementById("checkout-close"),
+  checkoutFormTitle: document.getElementById("checkout-form-title"),
+  checkoutForm: document.getElementById("checkout-form"),
+  checkoutNameLabel: document.getElementById("checkout-name-label"),
+  checkoutPhoneLabel: document.getElementById("checkout-phone-label"),
+  checkoutAddressLabel: document.getElementById("checkout-address-label"),
+  checkoutPayLabel: document.getElementById("checkout-pay-label"),
+  checkoutBtnPay: document.getElementById("checkout-btn-pay"),
+  
+  // Success Modal
+  successModal: document.getElementById("success-modal"),
+  successTitle: document.getElementById("success-title"),
+  successDesc: document.getElementById("success-desc"),
+  successReceiptTitle: document.getElementById("success-receipt-title"),
+  successReceiptDetails: document.getElementById("success-receipt-details"),
+  successBackBtn: document.getElementById("success-back-btn"),
+  
+  // Lightbox Modal
+  lightboxModal: document.getElementById("lightbox-modal"),
+  lightboxClose: document.getElementById("lightbox-close"),
+  lightboxImg: document.getElementById("lightbox-img"),
+  
+  toast: document.getElementById("toast")
+};
+
+// --- INITIALIZE APPLICATION ---
+function init() {
+  loadStateFromLocalStorage();
+  bindEvents();
+  updateLanguageUI();
+  updateThemeUI();
 }
 
-// --- Event Listeners Setup ---
-function setupEventListeners() {
-  // Lang Toggle
-  if (elements.langToggle) {
-    elements.langToggle.addEventListener("click", toggleLanguage);
-  }
+// --- SAVE / LOAD STATE ---
+function saveStateToLocalStorage() {
+  localStorage.setItem("hedyaty_cart", JSON.stringify(state.cart));
+}
 
-  // Mobile Menu Toggler
-  if (elements.menuToggle && elements.navMenu) {
-    elements.menuToggle.addEventListener("click", () => {
-      elements.menuToggle.classList.toggle("active");
-      elements.navMenu.classList.toggle("active");
-    });
+function loadStateFromLocalStorage() {
+  const savedCart = localStorage.getItem("hedyaty_cart");
+  if (savedCart) state.cart = JSON.parse(savedCart);
+  
+  const savedLang = localStorage.getItem("hdyati_lang");
+  if (savedLang) state.lang = savedLang;
+}
 
-    // Close menu when clicking links
-    document.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        elements.menuToggle.classList.remove("active");
-        elements.navMenu.classList.remove("active");
-      });
-    });
-  }
-
-  // Header Scroll Shadow
-  window.addEventListener("scroll", handleHeaderScroll);
-
-  // Gallery Filter Buttons
-  elements.filterButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      const filter = e.currentTarget.getAttribute("data-filter");
-      
-      elements.filterButtons.forEach(b => b.classList.remove("active"));
-      e.currentTarget.classList.add("active");
-      
-      renderGallery(filter);
-    });
+// --- BIND EVENT LISTENERS ---
+function bindEvents() {
+  elements.langBtn.addEventListener("click", toggleLanguage);
+  elements.themeBtn.addEventListener("click", toggleTheme);
+  
+  bindNavigationLinks();
+  
+  elements.searchBtn.addEventListener("click", performSearch);
+  elements.searchBar.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") performSearch();
   });
-
-  // Modal Close Actions
-  if (elements.modalClose) {
-    elements.modalClose.addEventListener("click", closeModal);
-  }
-  if (elements.modal) {
-    elements.modal.addEventListener("click", (e) => {
-      if (e.target === elements.modal) closeModal();
-    });
-  }
-
-  // Back to Top Scroll
-  if (elements.backToTop) {
-    elements.backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  // Contact Form Custom WhatsApp Redirect
-  if (elements.contactForm) {
-    elements.contactForm.addEventListener("submit", handleContactSubmit);
-  }
-}
-
-// --- Header Scroll Behavior ---
-function handleHeaderScroll() {
-  if (window.scrollY > 50) {
-    elements.header.classList.add("scrolled");
-    elements.backToTop.classList.add("active");
-  } else {
-    elements.header.classList.remove("scrolled");
-    elements.backToTop.classList.remove("active");
-  }
-}
-
-// --- Bilingual Switcher Logic ---
-function toggleLanguage() {
-  currentLang = currentLang === "ar" ? "en" : "ar";
-  localStorage.setItem("hdyati_lang", currentLang);
-  setLanguage(currentLang);
   
-  // Re-render gallery to update card text
-  const activeFilterBtn = document.querySelector(".filter-btn.active");
-  const activeFilter = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
-  renderGallery(activeFilter);
+  elements.sortSelect.addEventListener("change", (e) => {
+    state.sortBy = e.target.value;
+    renderProducts();
+  });
+  
+  elements.cartToggleBtn.addEventListener("click", toggleCartDrawer);
+  elements.cartCloseBtn.addEventListener("click", toggleCartDrawer);
+  elements.cartOverlay.addEventListener("click", toggleCartDrawer);
+  elements.cartCheckoutBtn.addEventListener("click", openCheckoutModal);
+  
+  elements.checkoutClose.addEventListener("click", toggleCheckoutModal);
+  elements.checkoutForm.addEventListener("submit", handleCheckoutSubmit);
+  
+  elements.successBackBtn.addEventListener("click", () => {
+    elements.successModal.classList.remove("open");
+  });
+  
+  elements.heroCta.addEventListener("click", (e) => {
+    e.preventDefault();
+    elements.productsGrid.scrollIntoView({ behavior: 'smooth' });
+  });
+  
+  bindLightboxEvents();
 }
 
-function setLanguage(lang) {
-  const html = document.documentElement;
-  html.setAttribute("lang", lang);
-  html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+// Bind Navigation clicks
+function bindNavigationLinks() {
+  const menuItems = [
+    { el: elements.navHome, cat: "all" },
+    { el: elements.navGrad, cat: "تخرج" },
+    { el: elements.navPromo, cat: "ترقية" },
+    { el: elements.navWedding, cat: "زواج" },
+    { el: elements.navBirthday, cat: "ميلاد" },
+    { el: elements.navHajj, cat: "حج" },
+    { el: elements.navGifts, cat: "هدية" }
+  ];
   
-  // Update lang toggle text and button layout
-  if (elements.langText) {
-    elements.langText.textContent = lang === "ar" ? "English" : "العربية";
-  }
-
-  // Translate static data-i18n items
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
+  menuItems.forEach(item => {
+    if (item.el) {
+      item.el.addEventListener("click", (e) => {
+        e.preventDefault();
+        setCategory(item.cat);
+        elements.productsGrid.scrollIntoView({ behavior: 'smooth' });
+      });
     }
   });
-
-  // Update inputs placeholder
-  updatePlaceholders(lang);
 }
 
-// Update form input placeholders dynamically
-function updatePlaceholders(lang) {
-  if (elements.formName) {
-    elements.formName.placeholder = translations[lang].form_name_placeholder;
-  }
-  if (elements.formPhone) {
-    elements.formPhone.placeholder = translations[lang].form_phone_placeholder;
-  }
-  if (elements.formMessage) {
-    elements.formMessage.placeholder = translations[lang].form_msg_placeholder;
-  }
-}
-
-// --- Render Gallery Items dynamically ---
-function renderGallery(filter) {
-  if (!elements.galleryGrid) return;
-  
-  // Clear existing items
-  elements.galleryGrid.innerHTML = "";
-  
-  // Filter products
-  const filteredProducts = filter === "all" 
-    ? products 
-    : products.filter(p => p.category === filter);
-    
-  // Append items
-  filteredProducts.forEach(prod => {
-    const card = document.createElement("div");
-    card.className = "gallery-item";
-    
-    const title = currentLang === "ar" ? prod.titleAr : prod.titleEn;
-    const catText = translations[currentLang][`cat_${prod.category === "ميلاد" ? "birthday" : prod.category === "حج" ? "hajj" : prod.category === "زواج" ? "wedding" : prod.category === "تخرج" ? "grad" : prod.category === "ترقية" ? "promo" : "gifts"}`];
-    
-    card.innerHTML = `
-      <div class="gallery-img-wrapper" onclick="openQuickView('${prod.id}')">
-        <img class="gallery-img" src="${prod.img}" alt="${title}" loading="lazy">
-        <div class="gallery-img-overlay">
-          <span class="gallery-action-btn" aria-label="${translations[currentLang].quick_view_btn}">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
-        </div>
-      </div>
-      <div class="gallery-info" onclick="openQuickView('${prod.id}')">
-        <span class="gallery-cat">${catText}</span>
-        <h3 class="gallery-title">${title}</h3>
-        <button class="gallery-details-btn">
-          <i class="fa-solid fa-circle-info"></i>
-          <span>${translations[currentLang].quick_view_btn}</span>
-        </button>
-      </div>
-    `;
-    elements.galleryGrid.appendChild(card);
+// Bind Lightbox modal events
+function bindLightboxEvents() {
+  elements.lightboxClose.addEventListener("click", closeLightbox);
+  elements.lightboxModal.addEventListener("click", (e) => {
+    if (e.target === elements.lightboxModal) {
+      closeLightbox();
+    }
   });
 }
 
-// Make openQuickView globally accessible
-window.openQuickView = function(productId) {
-  const prod = products.find(p => p.id === productId);
-  if (!prod) return;
-  
-  const title = currentLang === "ar" ? prod.titleAr : prod.titleEn;
-  const desc = currentLang === "ar" ? prod.descAr : prod.descEn;
-  const catKey = prod.category === "ميلاد" ? "birthday" : prod.category === "حج" ? "hajj" : prod.category === "زواج" ? "wedding" : prod.category === "تخرج" ? "grad" : prod.category === "ترقية" ? "promo" : "gifts";
-  const catText = translations[currentLang][`cat_${catKey}`];
-  
-  if (elements.modalImg) elements.modalImg.src = prod.img;
-  if (elements.modalCat) elements.modalCat.textContent = catText;
-  if (elements.modalTitle) elements.modalTitle.textContent = title;
-  if (elements.modalDesc) elements.modalDesc.textContent = desc;
-  
-  // Format WhatsApp Checkout Link
-  // Qatari Shop number: 77403038 (International: +97477403038)
-  const fullDomain = window.location.origin + window.location.pathname;
-  const imageUrl = fullDomain + (fullDomain.endsWith("/") ? "" : "/") + prod.img;
-  const textPrefix = translations[currentLang].whatsapp_order_prefix;
-  
-  const waMsg = `${textPrefix}${catText} (${title}).\nرابط الصورة: ${imageUrl}`;
-  const encodedMsg = encodeURIComponent(waMsg);
-  
-  if (elements.modalOrderBtn) {
-    elements.modalOrderBtn.href = `https://wa.me/97477403038?text=${encodedMsg}`;
-  }
-  
-  if (elements.modal) {
-    elements.modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // disable scroll
-  }
-};
-
-// Make filterGallery globally accessible for footer link clicks
-window.filterGallery = function(category) {
-  // Find filter button and click it
-  const filterBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
-  if (filterBtn) {
-    filterBtn.click();
-  }
-};
-
-function closeModal() {
-  if (elements.modal) {
-    elements.modal.classList.remove("active");
-    document.body.style.overflow = ""; // restore scroll
-  }
+// --- LIGHTBOX OPERATIONS ---
+function openLightbox(imgSrc, title) {
+  elements.lightboxImg.src = imgSrc;
+  elements.lightboxImg.alt = title;
+  elements.lightboxModal.classList.add("open");
+  elements.body.style.overflow = "hidden";
 }
 
-// --- Contact Form Submission Handler ---
-function handleContactSubmit(e) {
-  e.preventDefault();
+function closeLightbox() {
+  elements.lightboxModal.classList.remove("open");
+  elements.body.style.overflow = "";
+}
+
+// --- TOGGLE CART DRAWER ---
+function toggleCartDrawer() {
+  elements.cartDrawer.classList.toggle("open");
+  elements.cartOverlay.classList.toggle("open");
+}
+
+// --- SET DYNAMIC CATEGORIES ---
+function setCategory(cat) {
+  state.category = cat;
   
-  const name = elements.formName ? elements.formName.value.trim() : "";
-  const phone = elements.formPhone ? elements.formPhone.value.trim() : "";
-  const message = elements.formMessage ? elements.formMessage.value.trim() : "";
+  const scrollBtns = elements.catScroll.querySelectorAll(".cat-scroll-btn");
+  scrollBtns.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.cat === cat);
+  });
   
-  if (!name || !phone || !message) {
-    alert(translations[currentLang].error_fill_fields);
+  renderProducts();
+}
+
+function performSearch() {
+  state.searchQuery = elements.searchBar.value.trim().toLowerCase();
+  renderProducts();
+}
+
+// --- RENDER DYNAMIC CATEGORY SCROLL ---
+function renderCategories() {
+  const t = TRANSLATIONS[state.lang];
+  const cats = [
+    { id: "all", name: t.catAll, icon: "fa-border-all" },
+    { id: "تخرج", name: t.navGrad, icon: "fa-graduation-cap" },
+    { id: "ترقية", name: t.navPromo, icon: "fa-briefcase" },
+    { id: "زواج", name: t.navWedding, icon: "fa-ring" },
+    { id: "ميلاد", name: t.navBirthday, icon: "fa-cake-candles" },
+    { id: "حج", name: t.navHajj, icon: "fa-kaaba" },
+    { id: "هدية", name: t.navGifts, icon: "fa-gift" }
+  ];
+  
+  elements.catScroll.innerHTML = "";
+  cats.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.className = `cat-scroll-btn ${state.category === cat.id ? "active" : ""}`;
+    btn.dataset.cat = cat.id;
+    btn.innerHTML = `<i class="fas ${cat.icon}"></i> <span>${cat.name}</span>`;
+    btn.addEventListener("click", () => {
+      setCategory(cat.id);
+      elements.productsGrid.scrollIntoView({ behavior: 'smooth' });
+    });
+    elements.catScroll.appendChild(btn);
+  });
+}
+
+// --- RENDER DYNAMIC PRODUCTS CATALOG ---
+function filterAndSortProducts() {
+  const filtered = PRODUCTS.filter(prod => {
+    const matchesCategory = state.category === "all" || prod.category === state.category;
+    const matchesSearch = prod.title[state.lang].toLowerCase().includes(state.searchQuery);
+    return matchesCategory && matchesSearch;
+  });
+  
+  return filtered.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0));
+}
+
+function createProductCard(prod, t) {
+  const card = document.createElement("article");
+  card.className = "product-card";
+  card.innerHTML = `
+    <div class="product-card-image" style="cursor: pointer;">
+      <img class="lazy-image" src="${prod.image}" alt="${prod.title[state.lang]}" loading="lazy">
+    </div>
+    <div class="product-card-content">
+      <h3 class="product-title">${prod.title[state.lang]}</h3>
+      <div class="product-card-footer">
+        <button class="add-to-cart-btn" data-id="${prod.id}">
+          <i class="fas fa-shopping-bag"></i> <span>${t.btnAddToCart}</span>
+        </button>
+      </div>
+    </div>
+  `;
+  
+  card.querySelector(".product-card-image").addEventListener("click", () => {
+    openLightbox(prod.image, prod.title[state.lang]);
+  });
+  
+  card.querySelector(".add-to-cart-btn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    addToCart(prod.id, e.currentTarget);
+  });
+  
+  return card;
+}
+
+function renderProducts() {
+  const t = TRANSLATIONS[state.lang];
+  const filtered = filterAndSortProducts();
+  
+  elements.productsGrid.innerHTML = "";
+  if (filtered.length === 0) {
+    elements.productsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">${state.lang === 'ar' ? 'لا توجد منتجات مطابقة للبحث.' : 'No products match your search.'}</p>`;
     return;
   }
   
-  // Assemble custom Qatari-friendly message
-  const welcomeText = translations[currentLang].whatsapp_contact_prefix;
-  const fullMessage = `${welcomeText}\n👤 الاسم: ${name}\n📱 الجوال: ${phone}\n💬 الاستفسار: ${message}`;
-  
-  const encodedText = encodeURIComponent(fullMessage);
-  const waUrl = `https://wa.me/97477403038?text=${encodedText}`;
-  
-  // Open WhatsApp in a new window/tab
-  window.open(waUrl, "_blank");
-  
-  // Reset Form
-  elements.contactForm.reset();
+  filtered.forEach(prod => {
+    const card = createProductCard(prod, t);
+    elements.productsGrid.appendChild(card);
+  });
 }
+
+// --- SHOPPING CART OPERATIONS ---
+function addToCart(prodId, buttonEl) {
+  const t = TRANSLATIONS[state.lang];
+  const prod = PRODUCTS.find(p => p.id === prodId);
+  if (!prod) return;
+  
+  const cartItem = state.cart.find(item => item.id === prodId);
+  if (cartItem) {
+    cartItem.quantity += 1;
+  } else {
+    state.cart.push({ id: prodId, quantity: 1 });
+  }
+  
+  saveStateToLocalStorage();
+  updateCartUI();
+  showToast(t.toastAdded);
+  animateAddToCartButton(buttonEl, t);
+}
+
+function animateAddToCartButton(buttonEl, t) {
+  const originalHtml = buttonEl.innerHTML;
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> <span>${t.btnAddedToCart}</span>`;
+  buttonEl.style.backgroundColor = "var(--success)";
+  buttonEl.style.borderColor = "var(--success)";
+  buttonEl.style.color = "#ffffff";
+  buttonEl.disabled = true;
+  
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHtml;
+    buttonEl.style.backgroundColor = "";
+    buttonEl.style.borderColor = "";
+    buttonEl.style.color = "";
+    buttonEl.disabled = false;
+  }, 1500);
+}
+
+function createCartItemRow(item, prod) {
+  const div = document.createElement("div");
+  div.className = "cart-item";
+  div.innerHTML = `
+    <img src="${prod.image}" alt="${prod.title[state.lang]}">
+    <div class="cart-item-details">
+      <h4>${prod.title[state.lang]}</h4>
+      <div class="cart-item-qty-ctrl">
+        <button class="qty-btn minus" data-id="${item.id}"><i class="fas fa-minus"></i></button>
+        <span>${item.quantity}</span>
+        <button class="qty-btn plus" data-id="${item.id}"><i class="fas fa-plus"></i></button>
+      </div>
+    </div>
+    <button class="cart-item-delete" data-id="${item.id}"><i class="far fa-trash-alt"></i></button>
+  `;
+  
+  div.querySelector(".qty-btn.minus").addEventListener("click", () => adjustCartQuantity(item.id, -1));
+  div.querySelector(".qty-btn.plus").addEventListener("click", () => adjustCartQuantity(item.id, 1));
+  div.querySelector(".cart-item-delete").addEventListener("click", () => removeFromCart(item.id));
+  
+  return div;
+}
+
+function updateCartUI() {
+  const t = TRANSLATIONS[state.lang];
+  const totalCount = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+  elements.cartCountBadge.innerText = totalCount;
+  elements.cartCountBadge.style.display = totalCount > 0 ? "flex" : "none";
+  
+  elements.cartItemsContainer.innerHTML = "";
+  if (state.cart.length === 0) {
+    elements.cartItemsContainer.innerHTML = `<p style="text-align: center; padding: 40px 10px; color: var(--text-muted);">${t.cartEmpty}</p>`;
+    elements.cartSummaryContainer.style.display = "none";
+    elements.cartCheckoutBtn.style.display = "none";
+    return;
+  }
+  
+  elements.cartSummaryContainer.style.display = "block";
+  elements.cartCheckoutBtn.style.display = "block";
+  
+  state.cart.forEach(item => {
+    const prod = PRODUCTS.find(p => p.id === item.id);
+    if (prod) {
+      elements.cartItemsContainer.appendChild(createCartItemRow(item, prod));
+    }
+  });
+  
+  elements.cartSummaryContainer.innerHTML = `
+    <div class="summary-row">
+      <span>${t.shipping}</span>
+      <strong style="color: var(--success);">${t.free}</strong>
+    </div>
+  `;
+}
+
+function adjustCartQuantity(prodId, amount) {
+  const item = state.cart.find(i => i.id === prodId);
+  if (!item) return;
+  
+  item.quantity += amount;
+  if (item.quantity <= 0) {
+    removeFromCart(prodId);
+  } else {
+    saveStateToLocalStorage();
+    updateCartUI();
+  }
+}
+
+function removeFromCart(prodId) {
+  const idx = state.cart.findIndex(i => i.id === prodId);
+  if (idx > -1) {
+    state.cart.splice(idx, 1);
+    saveStateToLocalStorage();
+    updateCartUI();
+  }
+}
+
+// --- CHECKOUT SIMULATION ---
+function toggleCheckoutModal() {
+  elements.checkoutModal.classList.toggle("open");
+}
+
+function openCheckoutModal() {
+  toggleCartDrawer();
+  toggleCheckoutModal();
+}
+
+function handleCheckoutSubmit(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById("client-name").value.trim();
+  const phone = document.getElementById("client-phone").value.trim();
+  const address = document.getElementById("client-address").value.trim();
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  
+  if (!name || !phone || !address) {
+    alert(state.lang === 'ar' ? 'الرجاء تعبئة كافة حقول التوصيل.' : 'Please fill all delivery fields.');
+    return;
+  }
+  
+  const orderNumber = "HD-" + Math.floor(100000 + Math.random() * 900000);
+  const receiptHTML = buildReceiptHtml();
+  const waUrl = buildWhatsAppLink(name, phone, address, payment, orderNumber);
+  
+  window.open(waUrl, "_blank");
+  showSuccessUI(orderNumber, name, phone, address, receiptHTML);
+  clearCartAndResetForm();
+}
+
+function buildReceiptHtml() {
+  let html = `<div style="display:flex; flex-direction:column; gap:8px;">`;
+  state.cart.forEach(item => {
+    const prod = PRODUCTS.find(p => p.id === item.id);
+    if (prod) {
+      html += `
+        <div style="display:flex; justify-content:space-between; font-size:0.88rem; border-bottom:1px dashed #eee; padding-bottom:6px;">
+          <span>${prod.title[state.lang]}</span>
+          <strong style="color:var(--primary);">× ${item.quantity}</strong>
+        </div>
+      `;
+    }
+  });
+  html += `</div>`;
+  return html;
+}
+
+function buildWhatsAppLink(name, phone, address, payment, orderNum) {
+  let payText = "";
+  if (payment === "apple") payText = "Apple Pay";
+  else if (payment === "card") payText = state.lang === "ar" ? "بطاقة ائتمان / مدى" : "Credit Card / Debit";
+  else payText = state.lang === "ar" ? "الدفع عند الاستلام" : "Cash on Delivery";
+
+  let productsText = "";
+  state.cart.forEach(item => {
+    const prod = PRODUCTS.find(p => p.id === item.id);
+    if (prod) {
+      productsText += `- ${prod.title[state.lang]} × ${item.quantity}\n`;
+    }
+  });
+
+  const orderMsg = state.lang === "ar" 
+    ? `طلب جديد من متجر هديتي 🌸\n\n👤 الاسم: ${name}\n📱 الجوال: ${phone}\n📍 العنوان: ${address}\n💳 الدفع: ${payText}\n\n📦 المنتجات المطلوبة:\n${productsText}\n🔢 رقم الطلب: ${orderNum}`
+    : `New Order from Hdyati Store 🌸\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n📍 Address: ${address}\n💳 Payment: ${payText}\n\n📦 Requested Products:\n${productsText}\n🔢 Order Number: ${orderNum}`;
+
+  return `https://wa.me/97477403038?text=${encodeURIComponent(orderMsg)}`;
+}
+
+function showSuccessUI(orderNumber, name, phone, address, receiptHTML) {
+  const t = TRANSLATIONS[state.lang];
+  elements.successReceiptDetails.innerHTML = `
+    <div style="background:var(--input-bg); border:1px solid var(--card-border); border-radius:12px; padding:15px; margin-bottom:15px;">
+      <div style="font-weight:600; margin-bottom:8px;">${t.orderNum} <span style="color:var(--primary-reverse); font-weight:700;">${orderNumber}</span></div>
+      <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">${name} | ${phone} | ${address}</div>
+      ${receiptHTML}
+    </div>
+  `;
+  elements.checkoutModal.classList.remove("open");
+  elements.successModal.classList.add("open");
+}
+
+function clearCartAndResetForm() {
+  state.cart = [];
+  saveStateToLocalStorage();
+  updateCartUI();
+  elements.checkoutForm.reset();
+}
+
+// --- SWITCH LANGUAGES ---
+function toggleLanguage() {
+  state.lang = state.lang === "ar" ? "en" : "ar";
+  localStorage.setItem("hdyati_lang", state.lang);
+  updateLanguageUI();
+}
+
+function updateLanguageUI() {
+  const t = TRANSLATIONS[state.lang];
+  
+  elements.html.setAttribute("lang", state.lang);
+  elements.html.setAttribute("dir", state.lang === "ar" ? "rtl" : "ltr");
+  document.title = t.siteTitle;
+  
+  elements.body.className = `${state.theme === "dark" ? "dark-mode" : ""} lang-${state.lang}`;
+  elements.langBtn.innerHTML = state.lang === "ar" ? `<i class="fas fa-globe"></i> English` : `<i class="fas fa-globe"></i> العربية`;
+  
+  updateStaticTexts(t);
+  updateCheckoutLabels(t);
+  
+  renderCategories();
+  renderProducts();
+  updateCartUI();
+}
+
+function updateStaticTexts(t) {
+  elements.searchBar.placeholder = t.searchPlaceholder;
+  elements.searchBtn.innerText = t.btnSearch;
+  
+  elements.heroTitle.innerText = t.heroTitle;
+  elements.heroSub.innerText = t.heroSub;
+  elements.heroCta.innerText = t.btnContinueShopping;
+  
+  elements.featuredTitle.innerText = t.featuredProducts;
+  elements.sortLabel.innerText = t.sortBy;
+  elements.sortSelect.options[0].text = t.sortPopular;
+  
+  elements.cartDrawerTitle.innerText = t.cartTitle;
+  elements.cartCheckoutBtn.innerText = t.btnCheckout;
+  
+  elements.footerDesc.innerText = t.footerDesc;
+  elements.footerContactH.innerText = t.footerContact;
+  elements.footerAddressText.innerHTML = `<i class="fas fa-map-marker-alt" style="margin-left: 8px; margin-right: 8px;"></i> ${t.footerAddress}`;
+  elements.footerRightsText.innerText = t.footerRights;
+}
+
+function updateCheckoutLabels(t) {
+  elements.checkoutFormTitle.innerText = t.checkoutTitle;
+  elements.checkoutNameLabel.innerText = t.clientName;
+  elements.checkoutPhoneLabel.innerText = t.clientPhone;
+  elements.checkoutAddressLabel.innerText = t.clientAddress;
+  elements.checkoutPayLabel.innerText = t.paymentMethod;
+  
+  document.getElementById("pay-apple-lbl").innerText = t.payApple;
+  document.getElementById("pay-card-lbl").innerText = t.payCard;
+  document.getElementById("pay-cod-lbl").innerText = t.payCod;
+  elements.checkoutBtnPay.innerText = t.btnPayNow;
+  
+  elements.successTitle.innerText = t.orderSuccessTitle;
+  elements.successDesc.innerText = t.orderSuccessDesc;
+  elements.successReceiptTitle.innerText = t.orderReceipt;
+  elements.successBackBtn.innerText = t.btnBackHome;
+  
+  injectSEOStructuredData();
+}
+
+// --- SWITCH THEMES ---
+function toggleTheme() {
+  state.theme = state.theme === "light" ? "dark" : "light";
+  updateThemeUI();
+}
+
+function updateThemeUI() {
+  if (state.theme === "dark") {
+    elements.body.classList.add("dark-mode");
+    elements.themeBtn.innerHTML = `<i class="fas fa-sun"></i> Light Mode`;
+  } else {
+    elements.body.classList.remove("dark-mode");
+    elements.themeBtn.innerHTML = `<i class="fas fa-moon"></i> Dark Mode`;
+  }
+}
+
+// --- INJECT SEO JSON-LD STRUCTURED DATA SCHEMA ---
+function buildSEOProductList() {
+  return PRODUCTS.slice(0, 6).map((prod, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "Product",
+      "name": prod.title[state.lang],
+      "image": window.location.origin + "/" + prod.image,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "QAR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }));
+}
+
+function injectSEOStructuredData() {
+  const existingScript = document.getElementById("seo-schema-ld");
+  if (existingScript) existingScript.remove();
+  
+  const t = TRANSLATIONS[state.lang];
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": t.featuredProducts,
+    "description": t.metaDesc,
+    "numberOfItems": PRODUCTS.length,
+    "itemListElement": buildSEOProductList()
+  };
+  
+  const script = document.createElement("script");
+  script.id = "seo-schema-ld";
+  script.type = "application/ld+json";
+  script.innerHTML = JSON.stringify(schema, null, 2);
+  document.head.appendChild(script);
+}
+
+// --- UTILS ---
+function showToast(message) {
+  elements.toast.querySelector("span").innerText = message;
+  elements.toast.classList.add("show");
+  
+  setTimeout(() => {
+    elements.toast.classList.remove("show");
+  }, 3500);
+}
+
+// Run init on load
+window.addEventListener("DOMContentLoaded", init);
