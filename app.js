@@ -344,7 +344,7 @@ const TRANSLATIONS = {
     btnAddToCart: "اطلب الآن",
     btnAddedToCart: "تمت الإضافة ✔",
     btnCheckout: "أكمل طلبك عبر واتساب",
-    btnHeroContact: "التواصل 77403038",
+    btnHeroContact: "اتصال 77403038",
     shipping: "التوصيل لجميع مناطق قطر:",
     free: "مجاني 🇶🇦",
     checkoutTitle: "أكمل طلبك — سيتواصل معك فريق هديتي",
@@ -403,7 +403,7 @@ const TRANSLATIONS = {
     btnAddToCart: "Order Now",
     btnAddedToCart: "Added ✔",
     btnCheckout: "Complete Order via WhatsApp",
-    btnHeroContact: "Contact 77403038",
+    btnHeroContact: "Call 77403038",
     shipping: "Delivery (All Qatar):",
     free: "Free 🇶🇦",
     checkoutTitle: "Complete Your Order — Hdyati Team Will Contact You",
@@ -986,7 +986,7 @@ function updateStaticTexts(t) {
   
   elements.heroTitle.innerText = t.heroTitle;
   elements.heroSub.innerText = t.heroSub;
-  elements.heroCta.innerHTML = `<i class="fab fa-whatsapp"></i> <span>${t.btnHeroContact}</span>`;
+  elements.heroCta.innerHTML = `<i class="fas fa-phone-alt"></i> <span>${t.btnHeroContact}</span>`;
   
   elements.featuredTitle.innerText = t.featuredProducts;
   elements.sortLabel.innerText = t.sortBy;
