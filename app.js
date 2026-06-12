@@ -344,7 +344,7 @@ const TRANSLATIONS = {
     btnAddToCart: "اطلب الآن",
     btnAddedToCart: "تمت الإضافة ✔",
     btnCheckout: "أكمل طلبك عبر واتساب",
-    btnContinueShopping: "تصفح المزيد",
+    btnHeroContact: "التواصل 77403038",
     shipping: "التوصيل لجميع مناطق قطر:",
     free: "مجاني 🇶🇦",
     checkoutTitle: "أكمل طلبك — سيتواصل معك فريق هديتي",
@@ -403,7 +403,7 @@ const TRANSLATIONS = {
     btnAddToCart: "Order Now",
     btnAddedToCart: "Added ✔",
     btnCheckout: "Complete Order via WhatsApp",
-    btnContinueShopping: "Browse More",
+    btnHeroContact: "Contact 77403038",
     shipping: "Delivery (All Qatar):",
     free: "Free 🇶🇦",
     checkoutTitle: "Complete Your Order — Hdyati Team Will Contact You",
@@ -590,10 +590,7 @@ function bindEvents() {
     elements.successModal.classList.remove("open");
   });
   
-  elements.heroCta.addEventListener("click", (e) => {
-    e.preventDefault();
-    elements.productsGrid.scrollIntoView({ behavior: 'smooth' });
-  });
+  // heroCta functions as a direct WhatsApp link, no click interception needed
   
   bindLightboxEvents();
 }
@@ -989,7 +986,7 @@ function updateStaticTexts(t) {
   
   elements.heroTitle.innerText = t.heroTitle;
   elements.heroSub.innerText = t.heroSub;
-  elements.heroCta.innerText = t.btnContinueShopping;
+  elements.heroCta.innerHTML = `<i class="fab fa-whatsapp"></i> <span>${t.btnHeroContact}</span>`;
   
   elements.featuredTitle.innerText = t.featuredProducts;
   elements.sortLabel.innerText = t.sortBy;
